@@ -75,6 +75,14 @@ describe User do
     end
   end
 
+  describe 'instance' do
+    fixtures :expenses, :users
+
+    it 'should have many expenses' do
+      users(:default).expenses.should == [expenses(:default)]
+    end
+  end
+
   describe 'when being updated' do
     before do
       @user = users(:default)
@@ -90,6 +98,20 @@ describe User do
       @user.update_attributes(:email => 'new-address@example.com')
 
       User.authenticate(@user.email, 'test').should == @user
+    end
+  end
+
+  describe 'when being destroyed' do
+    fixtures :expenses, :users
+
+    before do
+      @user = users(:default)
+    end
+
+    it 'should destroy associated expenses' do
+      lambda {
+        @user.destroy
+      }.should change(Expense, :count).by(-1)
     end
   end
 

@@ -38,20 +38,6 @@ describe Expense do
     end
   end
 
-  describe 'when being destroyed' do
-    fixtures :expenses, :users
-
-    before do
-      @user = users(:default)
-    end
-
-    it 'should destroy associated expenses' do
-      lambda {
-        @user.destroy
-      }.should change(Expense, :count).by(-1)
-    end
-  end
-
   protected
 
   def create_expense(options = {})
