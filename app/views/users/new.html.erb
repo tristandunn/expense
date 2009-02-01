@@ -1,0 +1,21 @@
+<%= error_messages_for :user, :id => 'errors', :class => nil, :header_message => nil %>
+
+<% form_for(@user) do |form| %>
+  <fieldset>
+    <legend>User Information</legend>
+
+    <label for="user_email">E-mail Address</label><br />
+    <%= form.text_field :email %><br />
+    <br />
+
+    <label for="user_password">Password</label><br />
+    <%= form.password_field :password %><br />
+    <br />
+
+    <label for="user_password_confirmation">Password Confirmation</label><br />
+    <%= form.password_field :password_confirmation %><br />
+    <br />
+
+    <button type="submit">Create</button>
+  </fieldset>
+<% end %>
