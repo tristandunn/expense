@@ -1,6 +1,20 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Expense do
+  describe 'class' do
+    describe 'when finding recent expenses grouped by relative date' do
+      fixtures :expenses, :users
+
+      it 'should return an array of groups' do
+        users(:default).expenses.find_recent_grouped_by_relative_date.to_a.should == [['Today', [expenses(:default)]]]
+      end
+
+      it 'should support a custom limit' do
+        users(:default).expenses.find_recent_grouped_by_relative_date(0).to_a.should == []
+      end
+    end
+  end
+
   describe 'when being created' do
     it 'should create valid expense' do
       lambda {
@@ -35,6 +49,29 @@ describe Expense do
 
     it 'should belong to a user' do
       @expense.user.should == users(:default)
+    end
+
+    describe 'when determine relative date from today' do
+      { 0    => 'Today',
+        1    => 'Yesterday',
+        2    => 'Last Week',
+        7    => 'Two Weeks Ago',
+        14   => 'Three Weeks Ago',
+        21   => 'Four Weeks Ago',
+        30   => 'Last Month',
+        60   => 'Two Months Ago',
+        90   => 'Three Months Ago',
+        120  => 'Four Months Ago',
+        140  => 'This Year',
+        365  => 'Last Year',
+        730  => 'Two Years Ago',
+        1095 => 'Several Years Ago'
+      }.each do |number_of, group|
+        it "should return '#{group}' for #{number_of} days ago" do
+          expense = create_expense(:created_at => number_of.days.ago)
+          expense.relative_date.should == group
+        end
+      end
     end
   end
 
