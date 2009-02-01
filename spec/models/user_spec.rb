@@ -9,7 +9,7 @@ describe User do
         @user = users(:default)
       end
 
-      it 'should return the user for valid credntials' do
+      it 'should return the user for valid credentials' do
         User.authenticate(@user.email, 'test').should == @user
       end
 
