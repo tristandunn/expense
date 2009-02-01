@@ -1,0 +1,172 @@
+body {
+  background: #F4ECCF;
+  color: #444;
+  font-size: 10px;
+  font-family: Helvetica, Arial, Sans-serif;
+}
+
+legend,
+#content h2.title {
+  position: absolute;
+  left: -9999px;
+  overflow: hidden;
+}
+
+div.container {
+  position: relative;
+  width: 740px;
+  margin: 0 auto;
+  padding: 20px 10px;
+  overflow: hidden;
+}
+
+#header {
+  background: #5A843A;
+  color: #FFF;
+  border-bottom: 3px solid #2E580E;
+}
+
+#header div.container {
+  padding: 15px 10px 25px 10px;
+}
+
+#header h1 {
+  font-size: 48px;
+  font-family: Futura, 'Gill Sans', Arial, Sans-serif;
+  text-shadow: 2px 2px 0 #2E580E;
+  float: left;
+}
+
+#header h1 a {
+  background: inherit;
+  color: #FFF;
+  text-decoration: none;
+}
+
+#header p {
+  position: absolute;
+  background: inherit;
+  color: #8EC86E;
+  top: 64px;
+  left: 78px;
+  font-size: 11px;
+  font-family: "Lucida Grande";
+}
+
+#content {
+  background: #FFF;
+  color: #333;
+  border-bottom: 3px solid #E4DFC4;
+}
+
+#content h2 {
+  margin: 0 0 20px 0;
+  padding: 2px;
+  border-bottom: 2px solid #DDD;
+  font-size: 12px;
+  font-family: 'Gill Sans', Arial, Sans-serif;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#content form {
+  background: #F2FCFE;
+  color: #333;
+  width: 250px;
+  padding: 10px;
+  border: 2px solid #D1EFF9;
+  font-size: 12px;
+  float: right;
+}
+
+#content form#new_user {
+  margin: 0 auto;
+  float: none;
+}
+
+#content form label {
+  color: #617F89;
+  font-weight: bold;
+}
+
+#content form input {
+  width: 238px;
+  padding: 4px;
+  border: 1px solid #A6AAAB;
+  font-size: 12px;
+  outline: 0;
+}
+
+#content form div.fieldWithErrors input {
+  border-color: #900;
+}
+
+#content form a {
+  background: inherit;
+  color: #333;
+}
+
+#introduction {
+  width: 450px;
+  float: left;
+}
+
+#introduction p {
+  margin: 0 0 16px 0;
+  padding: 0 16px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+#introduction li {
+  margin: 0 0 0 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  list-style-type: disc;
+}
+
+#introduction p strong {
+  background: inherit;
+  color: #000;
+  font-weight: bold;
+}
+
+#errors {
+  background: #FEF2F2;
+  color: #900;
+  width: 250px;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+  border: 2px solid #F9D1D1;
+}
+
+#errors p,
+#errors li {
+  font-size: 11px;
+  font-family: "Lucida Grande";
+}
+
+#errors ul {
+  margin: 11px 0 0 0;
+}
+
+#errors li {
+  margin: 0 0 0 16px;
+  list-style-type: disc;
+}
+
+#errors li:after {
+  content: ".";
+}
+
+#footer p {
+  font-size: 11px;
+  font-family: "Lucida Grande", Helvetica, Arial, Sans-serif;
+  text-align: center;
+}
+
+#footer p a {
+  background: inherit;
+  color: #444;
+}

@@ -1,3 +1,19 @@
+<h2>Welcome to Expense</h2>
+
+<div id="introduction">
+  <p>Expense <strong>will not</strong> balance your checkbox, send invoices, connect to your bank for updates, interface with QuickBooks, or prevent you from spending too much money.</p>
+
+  <p>Expense <strong>will</strong> do the following:</p>
+
+  <ol>
+    <li>Allow you to enter expenses when you want.</li>
+    <li>Provide you with a searchable history of past expenses.</li>
+    <li>Let you know if you are above or below your average spending for the day, week, or month.</li>
+  </ol>
+</div>
+
+<h2 class="title">Log In</h2>
+
 <% form_tag(session_path, :method => :post) do %>
   <fieldset>
     <legend>User Information</legend>
@@ -10,6 +26,6 @@
     <%= password_field_tag %><br />
     <br />
 
-    <button type="submit">Log In</button>
+    <button type="submit">Log In</button> or <a href="<%= new_user_path %>">create an account</a>.
   </fieldset>
 <% end %>
