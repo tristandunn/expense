@@ -114,6 +114,24 @@ div.container {
   color: #333;
 }
 
+#content ul.expenses {
+  margin: 0 0 32px 0;
+}
+
+#content ul.expenses li {
+  background: inherit;
+  color: #555;
+  padding: 5px 10px;
+  font-size: 13px;
+  list-style: none;
+}
+
+#content ul.expenses li strong {
+  background: inherit;
+  color: #333;
+  font-weight: bold;
+}
+
 #introduction {
   width: 450px;
   float: left;

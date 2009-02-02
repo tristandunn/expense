@@ -1,0 +1,11 @@
+<h2>Recent Expenses</h2>
+
+<% @expenses.each do |group, expenses| %>
+  <h3><%= group %></h3>
+
+  <ul class="expenses">
+    <% expenses.each do |expense| -%>
+      <li><strong><%= number_to_currency expense.cost %></strong> on <span><%= h expense.item %></span>.</li>
+    <% end %>
+  </ul>
+<% end %>
