@@ -53,6 +53,28 @@ div.container {
   font-family: "Lucida Grande";
 }
 
+#header ul {
+  float: right;
+}
+
+#header li {
+  display: inline;
+}
+
+#header li a {
+  background: inherit;
+  color: #FFF;
+  font-size: 11px;
+  font-family: "Lucida Grande";
+  text-decoration: none;
+  display: block;
+  float: left;
+}
+
+#header li a:hover {
+  text-decoration: underline;
+}
+
 #content {
   background: #FFF;
   color: #333;
