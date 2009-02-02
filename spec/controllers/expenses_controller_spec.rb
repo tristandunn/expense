@@ -11,7 +11,14 @@ describe ExpensesController do
 
   describe 'on GET to index' do
     before do
+      @expense = mock('Expense')
+      @expenses.stub!(:build).and_return(@expense)
       @expenses.stub!(:find_recent_grouped_by_relative_date).and_return(@expenses)
+    end
+
+    it 'should assign new expense' do
+      do_get
+      assigns[:expense].should == @expense
     end
 
     it 'should group recent expenses' do

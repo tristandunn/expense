@@ -6,7 +6,8 @@ body {
 }
 
 legend,
-#content h2 {
+#content h2,
+#header form label {
   position: absolute;
   left: -9999px;
   overflow: hidden;
@@ -73,6 +74,34 @@ div.container {
 
 #header li a:hover {
   text-decoration: underline;
+}
+
+#header form {
+  float: right;
+  clear: right;
+}
+
+#header input {
+  position: absolute;
+  background: #FFF;
+  color: #555;
+  top: 40px;
+  right: 0;
+  width: 200px;
+  padding: 4px;
+  border: 2px solid #2E580E;
+  outline: 0;
+  font-size: 12px;
+}
+
+#header input:focus {
+  background: #FFF;
+  color: #000;
+}
+
+#header br,
+#header button {
+  display: none;
 }
 
 #content {

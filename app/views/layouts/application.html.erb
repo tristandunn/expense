@@ -19,6 +19,18 @@
       <ul>
         <li><a href="/logout">Logout</a></li>
       </ul>
+
+      <% form_for(@expense) do |form| %>
+        <fieldset>
+          <legend>Add an Expense</legend>
+
+          <label for="expense_item">Item</label><br />
+          <%= form.text_field :item %>
+          <br />
+
+          <button type="submit">Add</button>
+        </fieldset>
+      <% end %>
     <% end %>
   </div>
 </div>

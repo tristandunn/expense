@@ -1,6 +1,7 @@
 class ExpensesController < ApplicationController
   # List recent expenses.
   def index
+    @expense  = current_user.expenses.build
     @expenses = current_user.expenses.find_recent_grouped_by_relative_date
   end
 
