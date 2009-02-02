@@ -183,33 +183,28 @@ div.container {
 }
 
 #content {
-  width: 475px;
-  float: left;
-}
-
-#introduction {
   width: 450px;
   float: left;
 }
 
-#introduction p {
+#content p {
   margin: 0 0 16px 0;
   padding: 0 16px;
   font-size: 12px;
   line-height: 1.6;
 }
 
-#introduction li {
+#content p strong {
+  background: inherit;
+  color: #000;
+  font-weight: bold;
+}
+
+#content li {
   margin: 0 0 0 16px;
   font-size: 12px;
   line-height: 1.6;
   list-style-type: disc;
-}
-
-#introduction p strong {
-  background: inherit;
-  color: #000;
-  font-weight: bold;
 }
 
 #errors {
@@ -241,7 +236,7 @@ div.container {
 }
 
 #sidebar {
-  width: 225px;
+  width: 250px;
   float: right;
 }
 
