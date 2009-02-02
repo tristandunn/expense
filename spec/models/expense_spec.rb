@@ -6,6 +6,17 @@ describe Expense do
   end
 
   describe 'class' do
+    describe 'when calculating the average for a given unit' do
+      before do
+        Expense.stub!(:find_averages_for).and_return([5, 10])
+        Expense.stub!(:determine_interval_for).and_return(2)
+      end
+
+      it 'should return the average' do
+        Expense.calculate_average_for(:day).should == 7.5
+      end
+    end
+
     describe 'when finding recent expenses grouped by relative date' do
       fixtures :expenses, :users
 
@@ -15,6 +26,63 @@ describe Expense do
 
       it 'should support a custom limit' do
         users(:default).expenses.find_recent_grouped_by_relative_date(0).to_a.should == []
+      end
+    end
+
+    describe 'when finding averages by range' do
+      fixtures :expenses, :users
+
+      describe 'of days' do
+        it 'should return averages for each day' do
+          users(:bob).expenses.find_averages_for(:day).should == [7.50, 40.00, 60.00, 25.00]
+        end
+      end
+
+      describe 'of weeks' do
+        it 'should return averages for each week' do
+          users(:bob).expenses.find_averages_for(:week).should == [7.50, 50.00, 25.00]
+        end
+      end
+
+      describe 'of months' do
+        it 'should return averages for each month' do
+          users(:bob).expenses.find_averages_for(:month).should == [7.50, 41.67]
+        end
+      end
+    end
+
+    describe 'when determing the duration since the first entry' do
+      before do
+        @first = mock('Expense')
+        @first.stub!(:created_at).and_return(60.days.ago)
+
+        Expense.stub!(:first).and_return(@first)
+      end
+
+      describe 'in days' do
+        it 'should return number of days since first entry' do
+          Expense.determine_duration_since_first_entry_in(:day).round.should == 60
+        end
+      end
+
+      describe 'in weeks' do
+        it 'should return number of weeks since first entry' do
+          Expense.determine_duration_since_first_entry_in(:week).round.should == 9
+        end
+      end
+
+      describe 'in months' do
+        it 'should return number of months since first entry' do
+          Expense.determine_duration_since_first_entry_in(:month).round.should == 2
+        end
+      end
+    end
+
+    describe 'when determing the form for a range' do
+      { :day => '%j%Y', :week => '%W%Y', :month => '%m%Y' }.each do |range, format|
+        it "should return '#{format}' for #{range}" do
+          Expense.determine_format_for(range).should == format
+        end
       end
     end
   end

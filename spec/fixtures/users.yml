@@ -1,3 +1,7 @@
 default:
   email: default-fixture@example.com
   hashed_password: "<%= User.hash_password('test') %>"
+
+bob:
+  email: bob-fixture@example.com
+  hashed_password: "<%= User.hash_password('test') %>"

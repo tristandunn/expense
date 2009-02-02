@@ -1,4 +1,34 @@
 default:
   user: default
   cost: 26.00
-  item: Rockstar for the Rails Rumble.
+  item: Rockstar for the Rails Rumble
+
+bob_today:
+  user: bob
+  cost: 5.00
+  item: a lost bet
+  created_at: <%= 1.second.ago %>
+
+bob_today_two:
+  user: bob
+  cost: 10.00
+  item: a haircut
+  created_at: <%= 1.second.ago %>
+
+bob_last_week:
+  user: bob
+  cost: 40.00
+  item: groceries
+  created_at: <%= 8.days.ago %>
+
+bob_last_week_second:
+  user: bob
+  cost: 60.00
+  item: gas
+  created_at: <%= 9.days.ago %>
+
+bob_last_month:
+  user: bob
+  cost: 25.00
+  item: poker with the guys
+  created_at: <%= 30.days.ago %>

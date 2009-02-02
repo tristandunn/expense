@@ -7,6 +7,22 @@ class Expense < ActiveRecord::Base
   validates_numericality_of :cost, :greater_than => 0
   validates_presence_of     :item
 
+  # Determine the average for +unit+ of time.
+  #
+  # Valid options for +unit+ include: day, week, and month
+  def self.calculate_average_for(unit)
+    find_averages_for(unit).sum / determine_interval_for(unit).to_f
+  end
+
+  # Find averages for a given +unit+ of time.
+  def self.find_averages_for(unit)
+    all(:order => 'created_at DESC').group_by do |expense|
+      expense.created_at.strftime(determine_format_for(unit))
+    end.collect do |group, expenses|
+      (expenses.collect(&:cost).sum / expenses.length).round(2)
+    end
+  end
+
   # Find recent expenses, grouped by their relative date.
   def self.find_recent_grouped_by_relative_date(limit = 25)
     all(:order => 'created_at DESC', :limit => limit).group_by(&:relative_date)
@@ -30,6 +46,28 @@ class Expense < ActiveRecord::Base
     when 730..1094 then 'Two Years Ago'
     else                'Several Years Ago'
     end
+  end
+
+  protected
+
+  # Determine the format for a +unit+ of time.
+  def self.determine_format_for(unit)
+    case unit
+    when :day   then '%j%Y'
+    when :week  then '%W%Y'
+    when :month then '%m%Y'
+    end
+  end
+
+  # Determine the duration in +unit+'s since the first entry.
+  def self.determine_duration_since_first_entry_in(unit)
+    duration = case unit
+               when :day   then 1.day
+               when :week  then 7.days
+               when :month then 30.days
+               end
+
+    [1, (Time.now.to_f - first.created_at.to_f) / duration].max
   end
 
   # Extract the cost from an item, if none present.
