@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     if logged_in?
       redirect_to '/'
     else
-      render :action => 'new'
+      render :new
     end
   end
 

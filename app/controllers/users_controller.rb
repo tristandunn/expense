@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
       redirect_to '/'
     else
-      render :action => 'new'
+      render :new
     end
   end
 
