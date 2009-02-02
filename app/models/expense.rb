@@ -61,13 +61,15 @@ class Expense < ActiveRecord::Base
 
   # Determine the duration in +unit+'s since the first entry.
   def self.determine_duration_since_first_entry_in(unit)
+    return 1 unless first = first(:order => 'created_at ASC')
+
     duration = case unit
                when :day   then 1.day
                when :week  then 7.days
                when :month then 30.days
                end
 
-    [1, (Time.now.to_f - first(:order => 'created_at ASC').created_at.to_f) / duration].max
+    [1, (Time.now.to_f - first.created_at.to_f) / duration].max
   end
 
   # Extract the cost from an item, if none present.

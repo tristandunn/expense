@@ -52,28 +52,40 @@ describe Expense do
     end
 
     describe 'when determing the duration since the first entry' do
-      before do
-        @first = mock('Expense')
-        @first.stub!(:created_at).and_return(60.days.ago)
+      describe 'with no entries' do
+        before do
+          Expense.stub!(:first).and_return(nil)
+        end
 
-        Expense.stub!(:first).and_return(@first)
-      end
-
-      describe 'in days' do
-        it 'should return number of days since first entry' do
-          Expense.determine_duration_since_first_entry_in(:day).round.should == 60
+        it 'should return one' do
+          Expense.determine_duration_since_first_entry_in(nil).should == 1
         end
       end
 
-      describe 'in weeks' do
-        it 'should return number of weeks since first entry' do
-          Expense.determine_duration_since_first_entry_in(:week).round.should == 9
-        end
-      end
+      describe 'with at least one entry' do
+        before do
+          @first = mock('Expense')
+          @first.stub!(:created_at).and_return(60.days.ago)
 
-      describe 'in months' do
-        it 'should return number of months since first entry' do
-          Expense.determine_duration_since_first_entry_in(:month).round.should == 2
+          Expense.stub!(:first).and_return(@first)
+        end
+
+        describe 'in days' do
+          it 'should return number of days since first entry' do
+            Expense.determine_duration_since_first_entry_in(:day).round.should == 60
+          end
+        end
+
+        describe 'in weeks' do
+          it 'should return number of weeks since first entry' do
+            Expense.determine_duration_since_first_entry_in(:week).round.should == 9
+          end
+        end
+
+        describe 'in months' do
+          it 'should return number of months since first entry' do
+            Expense.determine_duration_since_first_entry_in(:month).round.should == 2
+          end
         end
       end
     end
