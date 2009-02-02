@@ -67,7 +67,7 @@ class Expense < ActiveRecord::Base
                when :month then 30.days
                end
 
-    [1, (Time.now.to_f - first.created_at.to_f) / duration].max
+    [1, (Time.now.to_f - first(:order => 'created_at ASC').created_at.to_f) / duration].max
   end
 
   # Extract the cost from an item, if none present.
