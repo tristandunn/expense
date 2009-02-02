@@ -6,7 +6,7 @@ body {
 }
 
 legend,
-#content h2.title {
+#content h2 {
   position: absolute;
   left: -9999px;
   overflow: hidden;
@@ -59,7 +59,10 @@ div.container {
   border-bottom: 3px solid #E4DFC4;
 }
 
-#content h2 {
+#content h3,
+#content h2.title {
+  position: static;
+  left: auto;
   margin: 0 0 20px 0;
   padding: 2px;
   border-bottom: 2px solid #DDD;
@@ -68,6 +71,10 @@ div.container {
   letter-spacing: 1px;
   word-spacing: 2px;
   text-transform: uppercase;
+}
+
+#content h3 {
+  margin: 0 0 10px 0;
 }
 
 #content form {
