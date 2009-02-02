@@ -42,6 +42,24 @@ describe Expense do
     it 'should require item' do
       create_expense(:item => nil).errors.on(:item).should_not be_nil
     end
+
+    describe 'with no cost' do
+      ['', 'on', 'for'].each do |separator|
+        describe "and cost and item separated by '#{separator}" do
+          before do
+            @expense = create_expense(:cost => nil, :item => "5.45 #{separator} Subway for lunch")
+          end
+
+          it 'should extract cost from item' do
+            @expense.cost.should == 5.45
+          end
+
+          it 'should remove cost from item' do
+            @expense.item.should == 'Subway for lunch'
+          end
+        end
+      end
+    end
   end
 
   describe 'instance' do

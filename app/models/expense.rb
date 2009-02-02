@@ -1,6 +1,8 @@
 class Expense < ActiveRecord::Base
   belongs_to :user
 
+  before_validation :extract_cost_from_item
+
   validates_presence_of     :user_id
   validates_numericality_of :cost, :greater_than => 0
   validates_presence_of     :item
@@ -27,6 +29,16 @@ class Expense < ActiveRecord::Base
     when 365..729  then 'Last Year'
     when 730..1094 then 'Two Years Ago'
     else                'Several Years Ago'
+    end
+  end
+
+  # Extract the cost from an item, if none present.
+  def extract_cost_from_item
+    return unless cost.nil?
+
+    if /^(\d+\.\d{1,2}|\d+)\s*(on|for)*\s+(.*)$/.match(item)
+      self.cost = $1
+      self.item = $3
     end
   end
 end
