@@ -11,7 +11,7 @@ class Expense < ActiveRecord::Base
   #
   # Valid options for +unit+ include: day, week, and month
   def self.calculate_average_for(unit)
-    find_averages_for(unit).sum / determine_interval_for(unit).to_f
+    find_averages_for(unit).sum / determine_duration_since_first_entry_in(unit).to_f
   end
 
   # Find averages for a given +unit+ of time.

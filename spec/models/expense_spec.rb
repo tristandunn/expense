@@ -9,7 +9,7 @@ describe Expense do
     describe 'when calculating the average for a given unit' do
       before do
         Expense.stub!(:find_averages_for).and_return([5, 10])
-        Expense.stub!(:determine_interval_for).and_return(2)
+        Expense.stub!(:determine_duration_since_first_entry_in).and_return(2)
       end
 
       it 'should return the average' do
