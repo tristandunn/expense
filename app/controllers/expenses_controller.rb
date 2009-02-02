@@ -3,6 +3,11 @@ class ExpensesController < ApplicationController
   def index
     @expense  = current_user.expenses.build
     @expenses = current_user.expenses.find_recent_grouped_by_relative_date
+    @averages = {
+      :day   => current_user.expenses.calculate_average_for(:day),
+      :week  => current_user.expenses.calculate_average_for(:week),
+      :month => current_user.expenses.calculate_average_for(:month)
+    }
   end
 
   # Display new expense form.

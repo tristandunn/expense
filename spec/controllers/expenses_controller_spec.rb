@@ -13,6 +13,7 @@ describe ExpensesController do
     before do
       @expense = mock('Expense')
       @expenses.stub!(:build).and_return(@expense)
+      @expenses.stub!(:calculate_average_for)
       @expenses.stub!(:find_recent_grouped_by_relative_date).and_return(@expenses)
     end
 
@@ -29,6 +30,13 @@ describe ExpensesController do
     it 'should assign recent expenses' do
       do_get
       assigns[:expenses].should == @expenses
+    end
+
+    [:day, :week, :month].each do |unit|
+      it "should calculate average for #{unit}s" do
+        @expenses.should_receive(:calculate_average_for).with(unit)
+        do_get
+      end
     end
 
     it 'should render index' do

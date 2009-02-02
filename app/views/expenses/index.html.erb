@@ -1,11 +1,26 @@
-<h2>Recent Expenses</h2>
+<div id="content">
+  <h2>Recent Expenses</h2>
 
-<% @expenses.each do |group, expenses| %>
-  <h3><%= group %></h3>
+  <% @expenses.each do |group, expenses| %>
+    <h3><%= group %></h3>
 
-  <ul class="expenses">
-    <% expenses.each do |expense| -%>
-      <li><strong><%= number_to_currency expense.cost %></strong> on <span><%= h expense.item %></span>.</li>
-    <% end %>
-  </ul>
-<% end %>
+    <ul class="expenses">
+      <% expenses.each do |expense| -%>
+        <li><strong><%= number_to_currency expense.cost %></strong> on <span><%= h expense.item %></span>.</li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div id="sidebar">
+  <h2>Averages</h2>
+
+  <dl id="summary">
+    <dt>Average per month</dt>
+    <dd><%= number_to_currency(@averages[:month] || 0) %></dd>
+    <dt>Average per week</dt>
+    <dd><%= number_to_currency(@averages[:week] || 0) %></dd>
+    <dt>Average per day</dt>
+    <dd><%= number_to_currency(@averages[:day] || 0) %></dd>
+  </dl>
+</div>

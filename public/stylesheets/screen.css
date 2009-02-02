@@ -6,7 +6,7 @@ body {
 }
 
 legend,
-#content h2,
+#content-container h2,
 #header form label {
   position: absolute;
   left: -9999px;
@@ -104,16 +104,15 @@ div.container {
   display: none;
 }
 
-#content {
+#content-container {
   background: #FFF;
   color: #333;
   border-bottom: 3px solid #E4DFC4;
 }
 
-#content h3,
-#content h2.title {
-  position: static;
-  left: auto;
+#sidebar dt,
+#content-container h3,
+#content-container h2.title {
   margin: 0 0 20px 0;
   padding: 2px;
   border-bottom: 2px solid #DDD;
@@ -124,11 +123,11 @@ div.container {
   text-transform: uppercase;
 }
 
-#content h3 {
+#content-container h3 {
   margin: 0 0 10px 0;
 }
 
-#content form {
+#content-container form {
   background: #F2FCFE;
   color: #333;
   width: 250px;
@@ -138,17 +137,17 @@ div.container {
   float: right;
 }
 
-#content form#new_user {
+#content-container form#new_user {
   margin: 0 auto;
   float: none;
 }
 
-#content form label {
+#content-container form label {
   color: #617F89;
   font-weight: bold;
 }
 
-#content form input {
+#content-container form input {
   width: 238px;
   padding: 4px;
   border: 1px solid #A6AAAB;
@@ -156,20 +155,20 @@ div.container {
   outline: 0;
 }
 
-#content form div.fieldWithErrors input {
+#content-container form div.fieldWithErrors input {
   border-color: #900;
 }
 
-#content form a {
+#content-container form a {
   background: inherit;
   color: #333;
 }
 
-#content ul.expenses {
+#content-container ul.expenses {
   margin: 0 0 32px 0;
 }
 
-#content ul.expenses li {
+#content-container ul.expenses li {
   background: inherit;
   color: #555;
   padding: 5px 10px;
@@ -177,10 +176,15 @@ div.container {
   list-style: none;
 }
 
-#content ul.expenses li strong {
+#content-container ul.expenses li strong {
   background: inherit;
   color: #333;
   font-weight: bold;
+}
+
+#content {
+  width: 475px;
+  float: left;
 }
 
 #introduction {
@@ -234,6 +238,35 @@ div.container {
 
 #errors li:after {
   content: ".";
+}
+
+#sidebar {
+  width: 225px;
+  float: right;
+}
+
+#sidebar dt {
+  margin: 0;
+  text-align: center;
+}
+
+#sidebar dd {
+  background: inherit;
+  color: #444;
+  margin: 4px 0 20px 0;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#sidebar dd.positive {
+  background: #FFF;
+  color: #755;
+}
+
+#sidebar dd.negative {
+  background: #FFF;
+  color: #565;
 }
 
 #footer p {
