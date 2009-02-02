@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Expense do
   before do
-    Time.zone = 'America/Chicago'
+    Time.zone = 'Central Time (US & Canada)'
   end
 
   describe 'class' do
