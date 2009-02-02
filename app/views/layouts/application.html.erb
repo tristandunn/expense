@@ -47,5 +47,9 @@
   </p>
 </div>
 
+<% if logged_in? %>
+  <%= javascript_include_tag 'application' %>
+<% end %>
+
 </body>
 </html>
