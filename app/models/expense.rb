@@ -12,7 +12,7 @@ class Expense < ActiveRecord::Base
 
   # Determine the relative date from today.
   def relative_date
-    case (Date.today - created_at.to_date).to_i
+    case (Date.today - created_at.to_date)
     when 0         then 'Today'
     when 1         then 'Yesterday'
     when 2..6      then 'Last Week'
