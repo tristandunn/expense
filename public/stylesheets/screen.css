@@ -254,12 +254,12 @@ div.container {
   text-align: center;
 }
 
-#sidebar dd.positive {
+#sidebar dd.above {
   background: #FFF;
   color: #755;
 }
 
-#sidebar dd.negative {
+#sidebar dd.below {
   background: #FFF;
   color: #565;
 }

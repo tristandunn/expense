@@ -23,10 +23,10 @@
 
   <dl id="summary">
     <dt>Average per month</dt>
-    <dd><%= number_to_currency(@averages[:month] || 0) %></dd>
+    <dd class="<%= class_for_status_of(:month, @expenses) %>"><%= number_to_currency(@averages[:month] || 0) %></dd>
     <dt>Average per week</dt>
-    <dd><%= number_to_currency(@averages[:week] || 0) %></dd>
+    <dd class="<%= class_for_status_of(:week, @expenses) %>"><%= number_to_currency(@averages[:week] || 0) %></dd>
     <dt>Average per day</dt>
-    <dd><%= number_to_currency(@averages[:day] || 0) %></dd>
+    <dd class="<%= class_for_status_of(:day, @expenses) %>"><%= number_to_currency(@averages[:day] || 0) %></dd>
   </dl>
 </div>

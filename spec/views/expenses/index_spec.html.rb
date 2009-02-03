@@ -10,6 +10,8 @@ describe 'when rendering /expenses/index.html' do
       ['Today',     [@today]],
       ['Yesterday', [@yesterday]]
     ]
+
+    template.stub!(:class_for_status_of)
   end
 
   it' should render expenses in groups' do
@@ -35,14 +37,16 @@ describe 'when rendering /expenses/index.html' do
         :week  => 2,
         :month => 3
       }
+
+      template.stub!(:class_for_status_of).and_return('below')
     end
 
-    it 'should render averages for day, week and month' do
+    it 'should render averages for day, week and month with class name of status' do
       render 'expenses/index.html.erb'
 
-      response.should have_tag('dd', '$1.00')
-      response.should have_tag('dd', '$2.00')
-      response.should have_tag('dd', '$3.00')
+      response.should have_tag('dd[class=?]', 'below', '$1.00')
+      response.should have_tag('dd[class=?]', 'below', '$2.00')
+      response.should have_tag('dd[class=?]', 'below', '$3.00')
     end
   end
 

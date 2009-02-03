@@ -18,35 +18,48 @@ describe Expense do
     end
 
     describe 'when determing if the current average is above the overall average' do
-      before do
-        Expense.stub!(:find_averages_for).and_return([4, 8])
-        Expense.stub!(:calculate_average_for).and_return(2)
-      end
+      describe 'with records' do
+        before do
+          Expense.stub!(:first).and_return(true)
+          Expense.stub!(:find_averages_for).and_return([4, 8])
+          Expense.stub!(:calculate_average_for).and_return(2)
+        end
 
-      it 'should find the averages for the provided unit' do
-        Expense.should_receive(:find_averages_for).with(:day)
-        Expense.is_above_average_for?(:day)
-      end
+        it 'should find the averages for the provided unit' do
+          Expense.should_receive(:find_averages_for).with(:day)
+          Expense.is_above_average_for?(:day)
+        end
 
-      it 'should calculate the averages for the provided unit' do
-        Expense.should_receive(:calculate_average_for).with(:day)
-        Expense.is_above_average_for?(:day)
-      end
+        it 'should calculate the averages for the provided unit' do
+          Expense.should_receive(:calculate_average_for).with(:day)
+          Expense.is_above_average_for?(:day)
+        end
 
-      describe 'when the current average is greater than the overall' do
-        it 'should return true' do
-          Expense.is_above_average_for?(:week).should == true
+        describe 'when the current average is greater than the overall' do
+          it 'should return true' do
+            Expense.is_above_average_for?(:week).should == true
+          end
+        end
+
+        describe 'when the current average is less than the overall' do
+          before do
+            Expense.stub!(:find_averages_for).and_return([2, 4])
+            Expense.stub!(:calculate_average_for).and_return(4)
+          end
+
+          it 'should return false' do
+            Expense.is_above_average_for?(:week).should == false
+          end
         end
       end
 
-      describe 'when the current average is less than the overall' do
+      describe 'without records' do
         before do
-          Expense.stub!(:find_averages_for).and_return([2, 4])
-          Expense.stub!(:calculate_average_for).and_return(4)
+          Expense.stub!(:first)
         end
 
         it 'should return false' do
-          Expense.is_above_average_for?(:week).should == false
+          Expense.is_above_average_for?(:month).should == false
         end
       end
     end

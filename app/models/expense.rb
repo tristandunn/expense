@@ -17,6 +17,8 @@ class Expense < ActiveRecord::Base
   # Determine if the latest average for +unit+ is above
   # the overall average.
   def self.is_above_average_for?(unit)
+    return false unless first = first(:order => 'created_at ASC')
+
     find_averages_for(unit).first > calculate_average_for(unit)
   end
 
