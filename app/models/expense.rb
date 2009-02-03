@@ -14,6 +14,12 @@ class Expense < ActiveRecord::Base
     find_averages_for(unit).sum / determine_duration_since_first_entry_in(unit).to_f
   end
 
+  # Determine if the latest average for +unit+ is above
+  # the overall average.
+  def self.is_above_average_for?(unit)
+    find_averages_for(unit).first > calculate_average_for(unit)
+  end
+
   # Find averages for a given +unit+ of time.
   def self.find_averages_for(unit)
     all(:order => 'created_at DESC').group_by do |expense|
