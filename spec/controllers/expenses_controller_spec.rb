@@ -11,10 +11,11 @@ describe ExpensesController do
 
   describe 'on GET to index' do
     before do
+      @groups  = mock('Groups')
       @expense = mock('Expense')
       @expenses.stub!(:build).and_return(@expense)
       @expenses.stub!(:calculate_average_for)
-      @expenses.stub!(:find_recent_grouped_by_relative_date).and_return(@expenses)
+      @expenses.stub!(:find_recent_grouped_by_relative_date).and_return(@groups)
     end
 
     it 'should assign new expense' do
@@ -27,9 +28,14 @@ describe ExpensesController do
       do_get
     end
 
-    it 'should assign recent expenses' do
+    it 'should assign expenses' do
       do_get
       assigns[:expenses].should == @expenses
+    end
+
+    it 'should assign groups' do
+      do_get
+      assigns[:groups].should == @groups
     end
 
     [:day, :week, :month].each do |unit|

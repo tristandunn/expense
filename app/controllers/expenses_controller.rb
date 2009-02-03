@@ -2,11 +2,12 @@ class ExpensesController < ApplicationController
   # List recent expenses.
   def index
     @expense  = current_user.expenses.build
-    @expenses = current_user.expenses.find_recent_grouped_by_relative_date
+    @expenses = current_user.expenses
+    @groups   = @expenses.find_recent_grouped_by_relative_date
     @averages = {
-      :day   => current_user.expenses.calculate_average_for(:day),
-      :week  => current_user.expenses.calculate_average_for(:week),
-      :month => current_user.expenses.calculate_average_for(:month)
+      :day   => @expenses.calculate_average_for(:day),
+      :week  => @expenses.calculate_average_for(:week),
+      :month => @expenses.calculate_average_for(:month)
     }
   end
 

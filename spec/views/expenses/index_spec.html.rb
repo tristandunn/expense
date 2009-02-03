@@ -6,7 +6,7 @@ describe 'when rendering /expenses/index.html' do
     @yesterday = mock_model(Expense, :cost => 10, :item => 'a big bag of chips')
 
     assigns[:averages] = {}
-    assigns[:expenses] = [
+    assigns[:groups]   = [
       ['Today',     [@today]],
       ['Yesterday', [@yesterday]]
     ]
