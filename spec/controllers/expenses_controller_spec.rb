@@ -123,6 +123,17 @@ describe ExpensesController do
         do_post
         response.should render_template('expenses/new')
       end
+
+      describe 'for iPhone request' do
+        before do
+          request.env['HTTP_USER_AGENT'] = 'Mobile/1.0 Safari'
+        end
+
+        it 'should redirect' do
+          do_post
+          response.should redirect_to('/')
+        end
+      end
     end
 
     protected

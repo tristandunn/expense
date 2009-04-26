@@ -1,0 +1,13 @@
+<h1><a href="/">Expense</a></h1>
+
+<% form_tag(session_path, :method => :post, :id => 'new_session') do %>
+    <label for="email">E-mail</label><br />
+    <%= text_field_tag :email %><br />
+    <br />
+
+    <label for="password">Password</label><br />
+    <%= password_field_tag %><br />
+    <br />
+
+    <button type="submit">Log In</button>
+<% end %>

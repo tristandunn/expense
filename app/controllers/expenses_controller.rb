@@ -26,7 +26,10 @@ class ExpensesController < ApplicationController
     if @expense.save
       redirect_to '/'
     else
-      render :action => :new
+      respond_to do |format|
+        format.html   { render :action => :new }
+        format.iphone { redirect_to '/' }
+      end
     end
   end
 end

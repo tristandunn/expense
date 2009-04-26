@@ -1,0 +1,110 @@
+body {
+  font-size: 10px;
+  min-height: 416px;
+}
+
+body,
+input {
+  font-family: Helvetica;
+}
+
+h1 {
+  background: #5A843A;
+  color: #FFF;
+  padding: 12px 0;
+  border-bottom: 3px solid #2E580E;
+  font-size: 32px;
+  text-align: center;
+  text-shadow: 2px 2px 0 #2E580E;
+}
+
+h1 a {
+  background: inherit;
+  color: #FFF;
+  text-decoration: none;
+}
+
+#new_session {
+  padding: 12px;
+}
+
+#new_session * {
+  font-size: 16px;
+}
+
+#new_expense {
+  position: relative;
+  background: #5A843A;
+  height: 50px;
+}
+
+#new_expense input {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 8px;
+  left: 6px;
+  background: #FFF;
+  color: #555;
+  font-size: 14px;
+}
+
+#new_expense input:focus {
+  background: #FFF;
+  color: #000;
+}
+
+#summary {
+  background: #F4ECCF;
+  color: #333;
+  padding: 12px 0;
+  border-bottom: 1px solid #CCC;
+  overflow: hidden;
+}
+
+#summary .group {
+  width: 33.33%;
+  text-align: center;
+  float: left;
+}
+
+#summary .group h3 {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+}
+
+#summary .group p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#summary .group p.above {
+  background: inherit;
+  color: #755;
+}
+
+#summary .group p.below {
+  background: inherit;
+  color: #565;
+}
+
+#expenses h3 {
+  background: #EEE;
+  color: #444;
+  padding: 8px 0;
+  border-top: 1px solid #FFF;
+  border-bottom: 1px solid #CCC;
+  font-size: 14px;
+  font-weight:  bold;
+  text-align: center;
+}
+
+#expenses li {
+  padding: 12px;
+  border-bottom: 1px solid #DDD;
+  font-size: 16px;
+}
+
+#expenses li strong {
+  font-weight: bold;
+}
