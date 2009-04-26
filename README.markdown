@@ -22,7 +22,7 @@ Simple, personal expense tracking.
 
 A simple iPhone-specific interface exists for expense entry and viewing.
 
-![iPhone interface.](http://fueledspark.com/images/projects/expense.iphone.png)
+![iPhone interface.](http://cloud.github.com/downloads/tristandunn/expense/expense.iphone.png)
 
 ## License
 
