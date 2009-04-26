@@ -18,6 +18,12 @@ Simple, personal expense tracking.
    rake db:migrate
    </pre>
 
+## iPhone
+
+A simple iPhone-specific interface exists for expense entry and viewing.
+
+![iPhone interface.](http://fueledspark.com/images/projects/expense.iphone.png)
+
 ## License
 
 The MIT License
