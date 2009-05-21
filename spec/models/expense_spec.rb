@@ -137,10 +137,26 @@ describe Expense do
       end
     end
 
-    describe 'when determing the form for a range' do
+    describe 'when determing the format for a range' do
       { :day => '%j%Y', :week => '%W%Y', :month => '%m%Y' }.each do |range, format|
         it "should return '#{format}' for #{range}" do
           Expense.determine_format_for(range).should == format
+        end
+      end
+    end
+
+    describe 'when searching' do
+      fixtures :expenses
+
+      it 'should find expenses by item' do
+        Expense.search('cer').should       == [expenses(:bob_last_week)]
+        Expense.search('grocer').should    == [expenses(:bob_last_week)]
+        Expense.search('groceries').should == [expenses(:bob_last_week)]
+      end
+
+      describe 'and grouping by relative date' do
+        it 'should find expenses by item and group by relative date' do
+          Expense.search_grouped_by_relative_date('cer').to_a.should == [['Two Weeks Ago', [expenses(:bob_last_week)]]]
         end
       end
     end

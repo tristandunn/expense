@@ -36,6 +36,16 @@ class Expense < ActiveRecord::Base
     all(:order => 'created_at DESC', :limit => limit).group_by(&:relative_date)
   end
 
+  # Search for expenses by a specific query.
+  def self.search(query)
+    all(:conditions => ['item LIKE ?', "%#{query}%"], :order => 'created_at DESC')
+  end
+
+  # Perform a search and group the results by relative date.
+  def self.search_grouped_by_relative_date(query)
+    search(query).group_by(&:relative_date)
+  end
+
   # Determine the relative date from today.
   def relative_date
     case (Date.today - created_at.to_date)
