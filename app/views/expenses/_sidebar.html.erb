@@ -7,4 +7,10 @@
   <dd class="<%= class_for_status_of(:week, @expenses) %>"><%= number_to_currency(@averages[:week] || 0) %></dd>
   <dt>Average per day</dt>
   <dd class="<%= class_for_status_of(:day, @expenses) %>"><%= number_to_currency(@averages[:day] || 0) %></dd>
+  <dt>Search</dt>
+  <dd>
+    <% form_for(:search, :url => search_expenses_path, :html => { :method => :get }) do %>
+      <%= text_field :search, 'query' %>
+    <% end %>
+  </dd>
 </dl>

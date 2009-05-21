@@ -240,6 +240,12 @@ div.container {
   float: right;
 }
 
+#sidebar form {
+  background: transparent;
+  padding: 0;
+  border: 0;
+}
+
 #sidebar dt {
   margin: 0;
   text-align: center;
