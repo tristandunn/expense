@@ -149,4 +149,61 @@ describe ExpensesController do
       }
     end
   end
+
+  describe 'on GET to search' do
+    before do
+      @groups  = mock('Groups')
+      @expense = mock('Expense')
+      @expenses.stub!(:build).and_return(@expense)
+      @expenses.stub!(:calculate_average_for)
+
+      Expense.stub!(:search_grouped_by_relative_date).and_return(@groups)
+    end
+
+    it 'should assign new expense' do
+      do_get
+      assigns[:expense].should == @expense
+    end
+
+    it 'should search for expenses and group results' do
+      Expense.should_receive(:search_grouped_by_relative_date)
+      do_get
+    end
+
+    it 'should assign expenses' do
+      do_get
+      assigns[:expenses].should == @expenses
+    end
+
+    it 'should assign groups' do
+      do_get
+      assigns[:groups].should == @groups
+    end
+
+    it 'should assign query' do
+      do_get
+      assigns[:query].should == 'test'
+    end
+
+    [:day, :week, :month].each do |unit|
+      it "should calculate average for #{unit}s" do
+        @expenses.should_receive(:calculate_average_for).with(unit)
+        do_get
+      end
+    end
+
+    it 'should render search' do
+      do_get
+      response.should render_template('expenses/search')
+    end
+
+    protected
+
+    def do_get
+      get :search,
+          :search => {
+            :query => 'test'
+          }
+    end
+  end
 end

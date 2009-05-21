@@ -1,7 +1,7 @@
 class ExpensesController < ApplicationController
-  before_filter :find_expenses,      :only => %w(index)
-  before_filter :build_expense,      :only => %w(index)
-  before_filter :calculate_averages, :only => %w(index)
+  before_filter :find_expenses,      :only => %w(index search)
+  before_filter :build_expense,      :only => %w(index search)
+  before_filter :calculate_averages, :only => %w(index search)
 
   # List recent expenses.
   def index
@@ -28,6 +28,12 @@ class ExpensesController < ApplicationController
         format.iphone { redirect_to '/' }
       end
     end
+  end
+
+  # Search expenses.
+  def search
+    @query  = params[:search][:query]
+    @groups = Expense.search_grouped_by_relative_date(@query)
   end
 
   protected
