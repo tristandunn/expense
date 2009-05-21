@@ -29,7 +29,7 @@
 
       <ul>
         <% expenses.each do |expense| -%>
-          <li><strong><%= number_to_currency expense.cost %></strong> on <span><%= h truncate(expense.item, 28) %></span>.</li>
+          <li><strong><%= number_to_currency expense.cost %></strong> on <span><%= h truncate(expense.item, :omission => '..', :length => 28) %></span>.</li>
         <% end %>
       </ul>
     <% end %>
