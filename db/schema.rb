@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090201204352) do
+ActiveRecord::Schema.define(:version => 20090523011759) do
 
   create_table "expenses", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20090201204352) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "expenses", ["user_id"], :name => "index_expenses_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                          :null => false
