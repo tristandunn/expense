@@ -1,10 +1,11 @@
 class ExpensesController < ApplicationController
-  before_filter :find_expenses,      :only => %w(index search)
-  before_filter :build_expense,      :only => %w(index search)
-  before_filter :calculate_averages, :only => %w(index search)
+  caches_action :index,
+                :cache_path => Proc.new { |c| "index/user/#{c.send(:current_user).id}.#{c.request.format.to_sym}" }
 
   # List recent expenses.
   def index
+    load_expenses_and_averages
+
     @groups = @expenses.find_recent_grouped_by_relative_date
   end
 
@@ -21,6 +22,8 @@ class ExpensesController < ApplicationController
     @expense = current_user.expenses.build(params[:expense])
 
     if @expense.save
+      expire_fragment %r{index/user/#{current_user.id}\..*}
+
       redirect_to '/'
     else
       respond_to do |format|
@@ -32,28 +35,22 @@ class ExpensesController < ApplicationController
 
   # Search expenses.
   def search
+    load_expenses_and_averages
+
     @query  = params[:search][:query]
     @groups = Expense.search_grouped_by_relative_date(@query)
   end
 
   protected
 
-  # Build an expense for the current user.
-  def build_expense
-    @expense = current_user.expenses.build
-  end
-
-  # Calculate daily, weekly and monthly averages.
-  def calculate_averages
+  # Load the generally required objects.
+  def load_expenses_and_averages
+    @expense  = current_user.expenses.build
+    @expenses = current_user.expenses
     @averages = {
       :day   => @expenses.calculate_average_for(:day),
       :week  => @expenses.calculate_average_for(:week),
       :month => @expenses.calculate_average_for(:month)
     }
-  end
-
-  # Find current users expenses.
-  def find_expenses
-    @expenses = current_user.expenses
   end
 end

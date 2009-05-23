@@ -4,28 +4,34 @@ describe ExpensesController do
   before do
     user_is_valid
 
+    @expense = mock('Expense')
     @expenses = mock('Expenses')
+    @expenses.stub!(:build).and_return(@expense)
+    @expenses.stub!(:calculate_average_for)
 
     @user.stub!(:expenses).and_return(@expenses)
   end
 
   describe 'on GET to index' do
     before do
-      @groups  = mock('Groups')
-      @expense = mock('Expense')
-      @expenses.stub!(:build).and_return(@expense)
-      @expenses.stub!(:calculate_average_for)
+      @groups = mock('Groups')
       @expenses.stub!(:find_recent_grouped_by_relative_date).and_return(@groups)
     end
 
-    it 'should assign new expense' do
+    it 'should load expenses and calculate averages' do
+      controller.instance_variable_set('@expenses', @expenses)
+      controller.should_receive(:load_expenses_and_averages)
       do_get
-      assigns[:expense].should == @expense
     end
 
     it 'should group recent expenses' do
       @expenses.should_receive(:find_recent_grouped_by_relative_date)
       do_get
+    end
+
+    it 'should assign new expense' do
+      do_get
+      assigns[:expense].should == @expense
     end
 
     it 'should assign expenses' do
@@ -36,13 +42,6 @@ describe ExpensesController do
     it 'should assign groups' do
       do_get
       assigns[:groups].should == @groups
-    end
-
-    [:day, :week, :month].each do |unit|
-      it "should calculate average for #{unit}s" do
-        @expenses.should_receive(:calculate_average_for).with(unit)
-        do_get
-      end
     end
 
     it 'should render index' do
@@ -58,11 +57,6 @@ describe ExpensesController do
   end
 
   describe 'on GET to new' do
-    before do
-      @expense = mock('Expense')
-      @expenses.stub!(:build).and_return(@expense)
-    end
-
     it 'should assign new expense' do
       do_get
       assigns[:expense].should == @expense
@@ -82,10 +76,7 @@ describe ExpensesController do
 
   describe 'on POST to create' do
     before do
-      @expense = mock('Expense')
       @expense.stub!(:save)
-
-      @expenses.stub!(:build).and_return(@expense)
     end
 
     it 'should build a new expense' do
@@ -101,6 +92,12 @@ describe ExpensesController do
     describe 'with valid attributes' do
       before do
         @expense.stub!(:save).and_return(true)
+        controller.stub!(:expire_fragment)
+      end
+
+      it 'should expire cache' do
+        controller.should_receive(:expire_fragment).with(%r{index/user/#{@user.id}\..*})
+        do_post
       end
 
       it 'should redirect' do
@@ -152,22 +149,25 @@ describe ExpensesController do
 
   describe 'on GET to search' do
     before do
-      @groups  = mock('Groups')
-      @expense = mock('Expense')
-      @expenses.stub!(:build).and_return(@expense)
-      @expenses.stub!(:calculate_average_for)
+      @groups = mock('Groups')
 
       Expense.stub!(:search_grouped_by_relative_date).and_return(@groups)
     end
 
-    it 'should assign new expense' do
+    it 'should load expenses and calculate averages' do
+      controller.instance_variable_set('@expenses', @expenses)
+      controller.should_receive(:load_expenses_and_averages)
       do_get
-      assigns[:expense].should == @expense
     end
 
     it 'should search for expenses and group results' do
       Expense.should_receive(:search_grouped_by_relative_date)
       do_get
+    end
+
+    it 'should assign new expense' do
+      do_get
+      assigns[:expense].should == @expense
     end
 
     it 'should assign expenses' do
@@ -185,13 +185,6 @@ describe ExpensesController do
       assigns[:query].should == 'test'
     end
 
-    [:day, :week, :month].each do |unit|
-      it "should calculate average for #{unit}s" do
-        @expenses.should_receive(:calculate_average_for).with(unit)
-        do_get
-      end
-    end
-
     it 'should render search' do
       do_get
       response.should render_template('expenses/search')
@@ -204,6 +197,25 @@ describe ExpensesController do
           :search => {
             :query => 'test'
           }
+    end
+  end
+
+  describe 'when loading expenses and averages' do
+    it 'should build a new expense' do
+      @expenses.should_receive(:build)
+      controller.send(:load_expenses_and_averages)
+    end
+
+    it 'should retrieve the current users expenses' do
+      @user.should_receive(:expenses)
+      controller.send(:load_expenses_and_averages)
+    end
+
+    [:day, :week, :month].each do |unit|
+      it "should calculate average for #{unit}s" do
+        @expenses.should_receive(:calculate_average_for).with(unit)
+        controller.send(:load_expenses_and_averages)
+      end
     end
   end
 end
