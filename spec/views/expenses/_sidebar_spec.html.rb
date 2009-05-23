@@ -7,14 +7,6 @@ describe 'when rendering /expenses/_sidebar.html' do
     template.stub!(:class_for_status_of)
   end
 
-  it 'should render search form in sidebar' do
-    render 'expenses/_sidebar.html.erb'
-
-    response.should have_tag('form[action=?][method=?]', search_expenses_path, 'get') do
-      with_tag 'input[name=?]', 'search[query]'
-    end
-  end
-
   describe 'when averages are present' do
     before do
       assigns[:averages] = {

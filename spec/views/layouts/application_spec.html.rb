@@ -18,5 +18,14 @@ describe 'when rendering /layouts/application.html' do
         with_tag 'button[type=?]', 'submit'
       end
     end
+
+    it 'should render search form in sidebar' do
+      response.should have_tag('form[action=?][method=?]', search_expenses_path, 'get') do
+        with_tag 'label[for=?]',  'search_query'
+        with_tag 'input[name=?]', 'search[query]'
+
+        with_tag 'button[type=?]', 'submit'
+      end
+    end
   end
 end

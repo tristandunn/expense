@@ -8,4 +8,14 @@ window.onload = function() {
       this.onfocus = null;
     };
   }
+
+  var query = document.getElementById('search_query');
+
+  if (query) {
+    query.value   = 'Search your expenses.';
+    query.onfocus = function() {
+      this.value   = '';
+      this.onfocus = null;
+    };
+  }
 };

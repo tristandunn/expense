@@ -43,6 +43,18 @@
 </div>
 
 <div id="footer" class="container">
+  <% form_for(:search, :url => search_expenses_path, :html => { :method => :get }) do %>
+    <fieldset>
+      <legend>Search</legend>
+
+      <label for="search_query">Query</label><br />
+      <%= text_field :search, 'query' %>
+      <br />
+
+      <button type="submit">Search</button>
+    </fieldset>
+  <% end %>
+
   <p>
     Created by <a href="http://tristandunn.com">Tristan Dunn</a>.
   </p>
