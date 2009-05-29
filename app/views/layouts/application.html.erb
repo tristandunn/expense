@@ -43,16 +43,18 @@
 </div>
 
 <div id="footer" class="container">
-  <% form_for(:search, :url => search_expenses_path, :html => { :method => :get }) do %>
-    <fieldset>
-      <legend>Search</legend>
+  <% if logged_in? %>
+    <% form_for(:search, :url => search_expenses_path, :html => { :method => :get }) do %>
+      <fieldset>
+        <legend>Search</legend>
 
-      <label for="search_query">Query</label><br />
-      <%= text_field :search, 'query' %>
-      <br />
+        <label for="search_query">Query</label><br />
+        <%= text_field :search, 'query' %>
+        <br />
 
-      <button type="submit">Search</button>
-    </fieldset>
+        <button type="submit">Search</button>
+      </fieldset>
+    <% end %>
   <% end %>
 
   <p>
