@@ -2,10 +2,6 @@
 
 Simple, personal expense tracking.
 
-## Demo
-
-I am running a [demo installation](http://expense.tristandunn.com), but would not recommend using it beyond exploring since it may disappear without notice.
-
 ## Install
 
 1. Clone the repository.
