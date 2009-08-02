@@ -1,4 +1,5 @@
 .DS_Store
+*.swp
 config/database.yml
 coverage
 db/*.sqlite3
