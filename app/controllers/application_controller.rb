@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def iphone_request?
-    return request.env['HTTP_USER_AGENT'] && request.env['HTTP_USER_AGENT'][/(Mobile\/.+Safari)/]
+    request.env['HTTP_USER_AGENT'] &&
+      request.env['HTTP_USER_AGENT'][/(AppleWebKit.+Mobile)/]
   end
 end

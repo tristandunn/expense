@@ -123,7 +123,7 @@ describe ExpensesController do
 
       describe 'for iPhone request' do
         before do
-          request.env['HTTP_USER_AGENT'] = 'Mobile/1.0 Safari'
+          request.env['HTTP_USER_AGENT'] = 'AppleWebKit Mobile'
         end
 
         it 'should redirect' do
