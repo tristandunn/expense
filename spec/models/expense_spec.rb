@@ -233,7 +233,7 @@ describe Expense do
         1095 => 'Several Years Ago'
       }.each do |number_of, group|
         it "should return '#{group}' for #{number_of} days ago" do
-          expense = create_expense(:created_at => Time.now.beginning_of_day - number_of.days)
+          expense = create_expense(:created_at => number_of.days.ago)
           expense.relative_date.should == group
         end
       end

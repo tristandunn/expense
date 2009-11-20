@@ -28,3 +28,8 @@ config.action_mailer.delivery_method = :test
 
 config.gem 'rspec',       :lib => false, :version => '>= 1.2.6'
 config.gem 'rspec-rails', :lib => false, :version => '>= 1.2.6'
+config.gem 'timecop',                    :version => '>= 0.3.1'
+
+config.after_initialize do
+  Timecop.travel(Time.local(2009, 7, 1, 12))
+end
