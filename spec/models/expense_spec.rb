@@ -186,6 +186,16 @@ describe Expense do
       create_expense(:item => nil).errors.on(:item).should_not be_nil
     end
 
+    it 'should allow a cost with a dollar sign' do
+      expense = create_expense(:cost => nil, :item => '$5.45 for lunch')
+      expense.cost.should == 5.45
+    end
+
+    it 'should allow a cost less than a dollar' do
+      expense = create_expense(:cost => nil, :item => '.25 for gum')
+      expense.cost.should == 0.25
+    end
+
     describe 'with no cost' do
       ['', 'on', 'for'].each do |separator|
         describe "and cost and item separated by '#{separator}" do
