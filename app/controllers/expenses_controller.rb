@@ -1,20 +1,14 @@
 class ExpensesController < ApplicationController
-  # List recent expenses.
   def index
     load_expenses_and_averages
 
     @groups = @expenses.find_recent_grouped_by_relative_date
   end
 
-  # Display new expense form.
   def new
     @expense = current_user.expenses.build
   end
 
-  # Attempt to create an expense.
-  #
-  # If successful redirect, otherwise display the new
-  # expense form.
   def create
     @expense = current_user.expenses.build(params[:expense])
 
@@ -28,7 +22,6 @@ class ExpensesController < ApplicationController
     end
   end
 
-  # Search expenses.
   def search
     load_expenses_and_averages
 
@@ -38,7 +31,6 @@ class ExpensesController < ApplicationController
 
   protected
 
-  # Load the generally required objects.
   def load_expenses_and_averages
     @expense  = current_user.expenses.build
     @expenses = current_user.expenses
