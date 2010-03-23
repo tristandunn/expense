@@ -29,7 +29,7 @@ A simple iPhone-specific interface exists for expense entry and viewing.
 
 The MIT License
 
-Copyright (c) 2009 Tristan Dunn
+Copyright (c) 2010 Tristan Dunn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
