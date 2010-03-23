@@ -92,12 +92,6 @@ describe ExpensesController do
     describe 'with valid attributes' do
       before do
         @expense.stub!(:save).and_return(true)
-        controller.stub!(:expire_fragment)
-      end
-
-      it 'should expire cache' do
-        controller.should_receive(:expire_fragment).with(%r{index/user/#{@user.id}\..*})
-        do_post
       end
 
       it 'should redirect' do
