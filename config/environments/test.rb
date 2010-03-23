@@ -26,9 +26,9 @@ config.action_mailer.delivery_method = :test
 # like if you have constraints or database-specific column types
 # config.active_record.schema_format = :sql
 
-config.gem 'rspec',       :lib => false, :version => '>= 1.2.6'
-config.gem 'rspec-rails', :lib => false, :version => '>= 1.2.6'
-config.gem 'timecop',                    :version => '>= 0.3.1'
+config.gem 'rspec',       :lib => false, :version => '>= 1.3.0'
+config.gem 'rspec-rails', :lib => false, :version => '>= 1.3.2'
+config.gem 'timecop',                    :version => '>= 0.3.4'
 
 config.after_initialize do
   Timecop.freeze(Time.local(2009, 7, 1, 12))
