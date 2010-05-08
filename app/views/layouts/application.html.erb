@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en-US">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8">
 
-	<title>Expense - Simple, personal expense tracking.</title>
+  <title>Expense - Simple, personal expense tracking.</title>
 
   <%= stylesheet_link_tag 'reset', 'screen' %>
 </head>
@@ -24,9 +24,9 @@
           <fieldset>
             <legend>Add an Expense</legend>
 
-            <label for="expense_item">Item</label><br />
+            <label for="expense_item">Item</label><br>
             <%= form.text_field :item %>
-            <br />
+            <br>
 
             <button type="submit">Add</button>
           </fieldset>
@@ -48,9 +48,9 @@
       <fieldset>
         <legend>Search</legend>
 
-        <label for="search_query">Query</label><br />
+        <label for="search_query">Query</label><br>
         <%= text_field :search, 'query' %>
-        <br />
+        <br>
 
         <button type="submit">Search</button>
       </fieldset>
@@ -58,8 +58,8 @@
   <% end %>
 
   <p>
-    Created by <a href="http://tristandunn.com">Tristan Dunn</a>.<br />
-    Open-source and <a href="http://github.com/tristandunn/expense">available on GitHub</a>.
+    Created by <a href="http://tristandunn.com">Tristan Dunn</a>.<br>
+    Source code <a href="http://github.com/tristandunn/expense">available on GitHub</a>.
   </p>
 </div>
 
