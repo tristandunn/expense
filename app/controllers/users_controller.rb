@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     if @user.save
       self.current_user = @user
 
-      redirect_to '/'
+      redirect_to root_url
     else
       render :new
     end
@@ -26,12 +26,12 @@ class UsersController < ApplicationController
   def destroy
     current_user.destroy
 
-    redirect_to '/'
+    redirect_to root_url
   end
 
   protected
 
   def ensure_request_is_for_current_user
-    redirect_to '/' unless current_user.id == params[:id].to_i
+    redirect_to root_url unless current_user.id == params[:id].to_i
   end
 end

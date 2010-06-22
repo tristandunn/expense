@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     self.current_user = User.authenticate(params[:email], params[:password])
 
     if logged_in?
-      redirect_to '/'
+      redirect_to root_url
     else
       render :new
     end
@@ -17,6 +17,6 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
 
-    redirect_to '/'
+    redirect_to root_url
   end
 end

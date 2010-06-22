@@ -67,7 +67,7 @@ describe UsersController do
 
       it 'should redirect' do
         do_post
-        response.should redirect_to('/')
+        response.should redirect_to(root_url)
       end
     end
 
@@ -116,7 +116,7 @@ describe UsersController do
     describe 'when not requested for current user' do
       it 'should redirect' do
         do_get :id => -1
-        response.should redirect_to('/')
+        response.should redirect_to(root_url)
       end
     end
 
@@ -137,7 +137,7 @@ describe UsersController do
 
     it 'should redirect' do
       do_delete
-      response.should redirect_to('/')
+      response.should redirect_to(root_url)
     end
 
     describe 'when requested for correct user' do

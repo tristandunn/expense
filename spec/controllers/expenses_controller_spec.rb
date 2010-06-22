@@ -96,7 +96,7 @@ describe ExpensesController do
 
       it 'should redirect' do
         do_post
-        response.should redirect_to('/')
+        response.should redirect_to(root_url)
       end
     end
 
@@ -122,7 +122,7 @@ describe ExpensesController do
 
         it 'should redirect' do
           do_post
-          response.should redirect_to('/')
+          response.should redirect_to(root_url)
         end
       end
     end

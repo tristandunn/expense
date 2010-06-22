@@ -13,11 +13,11 @@ class ExpensesController < ApplicationController
     @expense = current_user.expenses.build(params[:expense])
 
     if @expense.save
-      redirect_to '/'
+      redirect_to root_url
     else
       respond_to do |format|
         format.html   { render :action => :new }
-        format.iphone { redirect_to '/' }
+        format.iphone { redirect_to root_url }
       end
     end
   end

@@ -41,7 +41,7 @@ describe SessionsController do
 
       it 'should redirect' do
         do_post
-        response.should redirect_to('/')
+        response.should redirect_to(root_url)
       end
     end
 
@@ -84,7 +84,7 @@ describe SessionsController do
 
     it 'should redirect' do
       do_delete
-      response.should redirect_to('/')
+      response.should redirect_to(root_url)
     end
 
     protected
