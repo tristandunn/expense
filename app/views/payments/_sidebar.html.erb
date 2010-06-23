@@ -1,0 +1,10 @@
+<h2>Averages</h2>
+
+<dl id="summary">
+  <dt>Average per month</dt>
+  <dd class="<%= class_for_status_of(:month, @payments) %>"><%= number_to_currency(@averages[:month] || 0) %></dd>
+  <dt>Average per week</dt>
+  <dd class="<%= class_for_status_of(:week, @payments) %>"><%= number_to_currency(@averages[:week] || 0) %></dd>
+  <dt>Average per day</dt>
+  <dd class="<%= class_for_status_of(:day, @payments) %>"><%= number_to_currency(@averages[:day] || 0) %></dd>
+</dl>

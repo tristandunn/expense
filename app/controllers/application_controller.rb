@@ -1,14 +1,12 @@
 class ApplicationController < ActionController::Base
   include Authentication
 
-  helper :all
+  layout 'application'
 
   before_filter :login_required
   before_filter :adjust_format_for_iphone
 
   protect_from_forgery
-
-  filter_parameter_logging :password, :password_confirmation
 
   protected
 

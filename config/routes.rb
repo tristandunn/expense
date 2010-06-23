@@ -1,7 +1,19 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :expenses, :collection => { :search => :get }
-  map.resource  :session
-  map.resources :users, :member => { :delete => :get }
-  map.logout    'logout', :controller => 'sessions', :action => 'destroy'
-  map.root      :controller => 'expenses'
+Expense::Application.routes.draw do |map|
+  resources :payments do
+    collection do
+      get :search
+    end
+  end
+
+  resource :session
+
+  resources :users do
+    member do
+      get :delete
+    end
+  end
+
+  match 'logout' => 'sessions#destroy'
+
+  root  :to => 'payments#index'
 end

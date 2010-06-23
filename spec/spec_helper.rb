@@ -1,16 +1,12 @@
-ENV['RAILS_ENV'] ||= 'test'
+ENV["RAILS_ENV"] ||= 'test'
 
-unless defined?(RAILS_ROOT)
-  require File.dirname(__FILE__) + '/../config/environment'
-end
+require File.dirname(__FILE__) + "/../config/environment" unless defined?(Rails)
+require 'rspec/rails'
 
-require 'spec/autorun'
-require 'spec/rails'
-
-Spec::Runner.configure do |config|
+Rspec.configure do |config|
+  config.mock_with :rspec
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
-  config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 end
 
-require File.expand_path(File.dirname(__FILE__) + '/spec_helpers')
+require 'spec_helpers'

@@ -1,0 +1,43 @@
+<%= form_for(@payment) do |form| %>
+  <%= form.text_field :item %>
+<% end %>
+
+<div id="summary">
+  <div class="group">
+    <h3>Month</h3>
+
+    <p class="<%= class_for_status_of(:month, @payments) %>"><%= number_to_currency(@averages[:month] || 0) %></p>
+  </div>
+
+  <div class="group">
+    <h3>Week</h3>
+
+    <p class="<%= class_for_status_of(:week, @payments) %>"><%= number_to_currency(@averages[:week] || 0) %></p>
+  </div>
+
+  <div class="group">
+    <h3>Day</h3>
+
+    <p class="<%= class_for_status_of(:day, @payments) %>"><%= number_to_currency(@averages[:day] || 0) %></p>
+  </div>
+</div>
+
+<div id="payments">
+  <% if @groups.length > 0 %>
+    <% @groups.each do |group, payments| %>
+      <h3><%= group %></h3>
+
+      <ul>
+        <% payments.each do |payment| -%>
+          <li><strong><%= number_to_currency payment.cost %></strong> on <span><%= h truncate(payment.item, :omission => '..', :length => 28) %></span>.</li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% else %>
+    <h3>Today</h3>
+
+    <ul>
+      <li>You have not spent any money yet.</li>
+    </ul>
+  <% end %>
+</div>

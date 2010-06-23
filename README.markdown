@@ -11,7 +11,7 @@ Simple, personal expense tracking.
    </pre>
 3. Ensure you have the required gems installed.
    <pre>
-   rake gems:install
+   bundle install
    </pre>
 4. Create and migrate the database.
    <pre>

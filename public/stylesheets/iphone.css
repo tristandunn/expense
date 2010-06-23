@@ -32,13 +32,13 @@ h1 a {
   font-size: 16px;
 }
 
-#new_expense {
+#new_payment {
   position: relative;
   background: #5A843A;
   height: 50px;
 }
 
-#new_expense input {
+#new_payment input {
   position: absolute;
   top: 6px;
   right: 6px;
@@ -49,7 +49,7 @@ h1 a {
   font-size: 14px;
 }
 
-#new_expense input:focus {
+#new_payment input:focus {
   background: #FFF;
   color: #000;
 }
@@ -88,7 +88,7 @@ h1 a {
   color: #565;
 }
 
-#expenses h3 {
+#payments h3 {
   background: #EEE;
   color: #444;
   padding: 8px 0;
@@ -99,12 +99,12 @@ h1 a {
   text-align: center;
 }
 
-#expenses li {
+#payments li {
   padding: 12px;
   border-bottom: 1px solid #DDD;
   font-size: 16px;
 }
 
-#expenses li strong {
+#payments li strong {
   font-weight: bold;
 }

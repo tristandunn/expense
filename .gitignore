@@ -1,9 +1,4 @@
-.DS_Store
-*.swp
+.bundle
 config/database.yml
-coverage
-db/*.sqlite3
-doc/api
-doc/app
 log/*.log
 tmp/**/*

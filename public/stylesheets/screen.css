@@ -165,11 +165,11 @@ div.container {
   color: #333;
 }
 
-#content-container ul.expenses {
+#content-container ul.payments {
   margin: 0 0 32px 0;
 }
 
-#content-container ul.expenses li {
+#content-container ul.payments li {
   background: inherit;
   color: #555;
   padding: 5px 10px;
@@ -177,7 +177,7 @@ div.container {
   list-style: none;
 }
 
-#content-container ul.expenses li strong {
+#content-container ul.payments li strong {
   background: inherit;
   color: #333;
   font-weight: bold;

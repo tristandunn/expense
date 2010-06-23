@@ -6,7 +6,7 @@ describe User do
   describe 'class' do
     describe 'when authenticating a user' do
       before do
-        @user = users(:default)
+        @user = Factory(:user)
       end
 
       it 'should return the user for valid credentials' do
@@ -36,56 +36,50 @@ describe User do
   end
 
   describe 'when being created' do
-    it 'should create valid user' do
-      lambda {
-        create_user
-      }.should change(User, :count).by(1)
-    end
-
     it 'should require e-mail' do
-      create_user(:email => nil).errors.on(:email).should_not be_nil
+      Factory.build(:user, :email => nil).should_not be_valid
     end
 
     it 'should require valid e-mail' do
-      create_user(:email => '@.com').errors.on(:email).should_not be_nil
+      Factory.build(:user, :email => '@.com').should_not be_valid
     end
 
     it 'should require unique e-mail' do
-      create_user(:email => users(:default).email.upcase).errors.on(:email).should_not be_nil
+      user = Factory(:user)
+
+      Factory.build(:user, :email => user.email.upcase).should_not be_valid
     end
 
     it 'should require password' do
-      create_user(:password => nil).errors.on(:password).should_not be_nil
+      Factory.build(:user, :password => nil).should_not be_valid
     end
 
     it 'should require password confirmation' do
-      create_user(:password_confirmation => nil).errors.on(:password_confirmation).should_not be_nil
+      Factory.build(:user, :password_confirmation => nil).should_not be_valid
     end
 
     it 'should require password to match confirmation' do
-      create_user(:password => 'nope').errors.on(:password).should_not be_nil
+      Factory.build(:user, :password => 'nope').should_not be_valid
     end
 
     it 'should generate and set hashed password' do
-      create_user.hashed_password.should_not be_nil
+      Factory(:user).hashed_password.should_not be_nil
     end
 
     it 'should downcase e-mail' do
-      create_user(:email => 'SoMe@GuY.com').email.should == 'some@guy.com'
+      Factory(:user, :email => 'SoMe@GuY.com').email.should == 'some@guy.com'
     end
   end
 
   describe 'instance' do
-    fixtures :expenses, :users
-
-    it 'should have many expenses' do
-      users(:default).expenses.should == [expenses(:default)]
+    it 'should have many payments' do
+      Factory(:user).payments.should == []
     end
   end
 
   describe 'when being updated' do
     before do
-      @user = users(:default)
+      @user = Factory(:user)
     end
 
     it 'should re-hash password, if it was modified' do
@@ -102,35 +96,15 @@ describe User do
   end
 
   describe 'when being destroyed' do
-    fixtures :expenses, :users
-
     before do
-      @user = users(:default)
+      @user    = Factory(:user)
+      @payment = Factory(:payment, :user => @user)
     end
 
-    it 'should destroy associated expenses' do
+    it 'should destroy associated payments' do
       lambda {
         @user.destroy
-      }.should change(Expense, :count).by(-1)
+      }.should change(Payment, :count).by(-1)
     end
-  end
-
-  protected
-
-  def create_user(options = {})
-    returning(new_user(options)) do |account|
-      account.save
-    end
-  end
-
-  def new_user(options = {})
-    User.new(valid_attributes.merge(options))
-  end
-
-  def valid_attributes
-    { :email                 => 'default-valid@example.com',
-      :password              => 'test',
-      :password_confirmation => 'test'
-    }
   end
 end

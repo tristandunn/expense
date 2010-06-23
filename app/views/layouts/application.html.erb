@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
 <head>
-  <meta charset="utf-8">
-
   <title>Expense - Simple, personal expense tracking.</title>
 
   <%= stylesheet_link_tag 'reset', 'screen' %>
@@ -19,12 +17,12 @@
         <li><a href="/logout">Logout</a></li>
       </ul>
 
-      <% if @expense %>
-        <% form_for(@expense) do |form| %>
+      <% if @payment %>
+        <%= form_for(@payment) do |form| %>
           <fieldset>
-            <legend>Add an Expense</legend>
+            <legend>Add a Payment</legend>
 
-            <label for="expense_item">Item</label><br>
+            <label for="payment_item">Item</label><br>
             <%= form.text_field :item %>
             <br>
 
@@ -44,7 +42,7 @@
 
 <div id="footer" class="container">
   <% if logged_in? %>
-    <% form_for(:search, :url => search_expenses_path, :html => { :method => :get }) do %>
+    <%= form_for(:search, :url => search_payments_path, :html => { :method => :get }) do %>
       <fieldset>
         <legend>Search</legend>
 

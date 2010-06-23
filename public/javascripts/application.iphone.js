@@ -3,7 +3,7 @@ window.onload = function() {
     window.scrollTo(0, 1);
   }, 100);
 
-  var item = document.getElementById('expense_item');
+  var item = document.getElementById('payment_item');
 
   if (item) {
     item.value   = 'Example: 5.45 on Subway for lunch';

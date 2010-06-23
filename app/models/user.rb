@@ -1,7 +1,7 @@
 require 'digest/sha2'
 
 class User < ActiveRecord::Base
-  has_many :expenses, :dependent => :destroy
+  has_many :payments, :dependent => :destroy
 
   validates_presence_of   :email
   validates_uniqueness_of :email, :case_sensitive => false
