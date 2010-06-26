@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
-  def index
-    load_payments_and_averages
+  before_filter :load_payments_and_averages, :only => [:index, :search]
 
+  def index
     @groups = @payments.find_recent_grouped_by_relative_date
   end
 
@@ -23,8 +23,6 @@ class PaymentsController < ApplicationController
   end
 
   def search
-    load_payments_and_averages
-
     @query  = params[:search][:query]
     @groups = Payment.search_grouped_by_relative_date(@query)
   end
