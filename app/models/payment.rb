@@ -7,18 +7,20 @@ class Payment < ActiveRecord::Base
   validates_numericality_of :cost, :greater_than => 0
   validates_presence_of     :item
 
+  default_scope :order => 'created_at DESC'
+
   def self.calculate_average_for(unit)
     find_averages_for(unit).sum / determine_duration_since_first_entry_in(unit).to_f
   end
 
   def self.is_above_average_for?(unit)
-    return false unless first = first(:order => 'created_at ASC')
+    return false unless exists?
 
     find_averages_for(unit).first > calculate_average_for(unit)
   end
 
   def self.find_averages_for(unit)
-    all(:order => 'created_at DESC').group_by do |payment|
+    all.group_by do |payment|
       payment.created_at.strftime(determine_format_for(unit))
     end.collect do |group, payments|
       (payments.collect(&:cost).sum / payments.length).round(2)
@@ -26,11 +28,11 @@ class Payment < ActiveRecord::Base
   end
 
   def self.find_recent_grouped_by_relative_date(limit = 25)
-    all(:order => 'created_at DESC', :limit => limit).group_by(&:relative_date)
+    all(:limit => limit).group_by(&:relative_date)
   end
 
   def self.search(query)
-    all(:conditions => ['item LIKE ?', "%#{query}%"], :order => 'created_at DESC')
+    all(:conditions => ['item LIKE ?', "%#{query}%"])
   end
 
   def self.search_grouped_by_relative_date(query)

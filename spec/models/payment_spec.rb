@@ -16,7 +16,7 @@ describe Payment do
     describe 'when determing if the current average is above the overall average' do
       describe 'with records' do
         before do
-          Payment.stub!(:first).and_return(true)
+          Payment.stub!(:exists?).and_return(true)
           Payment.stub!(:find_averages_for).and_return([4, 8])
           Payment.stub!(:calculate_average_for).and_return(2)
         end
@@ -33,7 +33,7 @@ describe Payment do
 
         describe 'when the current average is greater than the overall' do
           it 'should return true' do
-            Payment.is_above_average_for?(:week).should == true
+            Payment.is_above_average_for?(:week).should be_true
           end
         end
 
@@ -44,18 +44,18 @@ describe Payment do
           end
 
           it 'should return false' do
-            Payment.is_above_average_for?(:week).should == false
+            Payment.is_above_average_for?(:week).should be_false
           end
         end
       end
 
       describe 'without records' do
         before do
-          Payment.stub!(:first)
+          Payment.stub!(:exists?)
         end
 
         it 'should return false' do
-          Payment.is_above_average_for?(:month).should == false
+          Payment.is_above_average_for?(:month).should be_false
         end
       end
     end
