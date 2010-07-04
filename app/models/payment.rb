@@ -83,9 +83,9 @@ class Payment < ActiveRecord::Base
   def extract_cost_from_item
     return unless cost.nil?
 
-    if /^[$]?(\d*\.\d{1,2}|\d+)\s*(on|for)*\s+(.*)$/.match(item)
+    if /^[$]?(\d*\.\d{1,2}|\d+)\s*(?:on|for)*\s+(.*)$/.match(item)
       self.cost = $1
-      self.item = $3
+      self.item = $2
     end
   end
 end
