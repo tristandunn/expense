@@ -23,7 +23,7 @@
             <legend>Add a Payment</legend>
 
             <label for="payment_item">Item</label><br>
-            <%= form.text_field :item %>
+            <%= form.text_field :item, :placeholder => 'Example: 5.45 on Subway for lunch' %>
             <br>
 
             <button type="submit">Add</button>
@@ -47,7 +47,7 @@
         <legend>Search</legend>
 
         <label for="search_query">Query</label><br>
-        <%= text_field :search, 'query' %>
+        <%= text_field :search, 'query', :placeholder => 'Search your expenses.' %>
         <br>
 
         <button type="submit">Search</button>
@@ -60,10 +60,6 @@
     Source code <a href="http://github.com/tristandunn/expense">available on GitHub</a>.
   </p>
 </div>
-
-<% if logged_in? %>
-  <%= javascript_include_tag 'application' %>
-<% end %>
 
 </body>
 </html>
