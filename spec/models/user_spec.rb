@@ -13,6 +13,10 @@ describe User do
         User.authenticate(@user.email, 'test').should == @user
       end
 
+      it 'should ignore case of e-mail address' do
+        User.authenticate(@user.email.upcase, 'test').should == @user
+      end
+
       it 'should return nil for invalid credentials' do
         User.authenticate(@user.email, 'nope').should be_nil
       end

@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   def self.authenticate(email, password)
-    find_by_email_and_hashed_password(email, hash_password(password))
+    find_by_email_and_hashed_password(email.downcase, hash_password(password))
   end
 
   def self.hash_password(password)
