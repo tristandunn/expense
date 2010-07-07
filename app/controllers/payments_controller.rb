@@ -30,8 +30,8 @@ class PaymentsController < ApplicationController
   protected
 
   def load_payments_and_averages
-    @payment  = current_user.payments.build
     @payments = current_user.payments
+    @payment  = @payments.build
     @averages = {
       :day   => @payments.calculate_average_for(:day),
       :week  => @payments.calculate_average_for(:week),
