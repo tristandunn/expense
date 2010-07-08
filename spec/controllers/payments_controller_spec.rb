@@ -15,23 +15,15 @@ describe PaymentsController do
   describe 'on GET to index' do
     before do
       @groups = mock('Groups')
-      @payments.stub!(:find_recent_grouped_by_relative_date).and_return(@groups)
+      @payments.stub!(:find_recent_grouped_by_relative_date).
+                and_return(@groups)
 
       get :index
     end
 
-    it 'should assign new payment' do
-      assigns(:payment).should == @payment
-    end
-
-    it 'should assign payments' do
-      assigns(:payments).should == @payments
-    end
-
-    it 'should assign groups' do
-      assigns(:groups).should == @groups
-    end
-
+    it { should assign_to(:groups, @groups) }
+    it { should assign_to(:payment, @payment) }
+    it { should assign_to(:payments, @payments) }
     it { should render_template(:index) }
   end
 
@@ -40,10 +32,7 @@ describe PaymentsController do
       get :new
     end
 
-    it 'should assign new payment' do
-      assigns(:payment).should == @payment
-    end
-
+    it { should assign_to(:payment, @payment) }
     it { should render_template(:new) }
   end
 
@@ -53,7 +42,9 @@ describe PaymentsController do
         attributes = Factory.attributes_for(:payment)
 
         @payment.stub!(:save).and_return(true)
-        @payments.should_receive(:build).with(hash_including(attributes)).and_return(@payment)
+        @payments.should_receive(:build).
+                  with(hash_including(attributes)).
+                  and_return(@payment)
 
         post :create, :payment => attributes
       end
@@ -69,10 +60,7 @@ describe PaymentsController do
         post :create, :payment => {}
       end
 
-      it 'should assign new payment' do
-        assigns(:payment).should == @payment
-      end
-
+      it { should assign_to(:payment, @payment) }
       it { should render_template(:new) }
     end
   end
@@ -86,22 +74,10 @@ describe PaymentsController do
       get :search, :search => { :query => 'test' }
     end
 
-    it 'should assign new payment' do
-      assigns(:payment).should == @payment
-    end
-
-    it 'should assign payments' do
-      assigns(:payments).should == @payments
-    end
-
-    it 'should assign groups' do
-      assigns(:groups).should == @groups
-    end
-
-    it 'should assign query' do
-      assigns(:query).should == 'test'
-    end
-
+    it { should assign_to(:query, 'test') }
+    it { should assign_to(:groups, @groups) }
+    it { should assign_to(:payment, @payment) }
+    it { should assign_to(:payments, @payments) }
     it { should render_template(:search) }
   end
 

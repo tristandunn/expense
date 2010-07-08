@@ -2,96 +2,60 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe SessionsController do
   describe 'on GET to new' do
-    it 'should render "sessions/new" template' do
-      do_get
-      response.should render_template('sessions/new')
-    end
-
-    protected
-
-    def do_get
+    before do
       get :new
     end
+
+    it { should render_template(:new) }
   end
 
   describe 'on POST to create' do
-    before do
-      controller.stub!(:logged_in?)
-      controller.stub!(:current_user=)
-    end
-
-    it 'should attempt to authenticate user' do
-      User.should_receive(:authenticate).with('valid@example.com', 'test')
-      do_post
-    end
-
     describe 'with valid authentication' do
       before do
         @user = mock_model(User)
 
-        User.stub!(:authenticate).and_return(@user)
+        User.stub!(:authenticate).
+             with('valid@example.com', 'test').
+             and_return(@user)
 
-        controller.stub!(:logged_in?).and_return(true)
+        post :create, :email => 'valid@example.com', :password => 'test'
       end
 
       it 'should set current user to authenticated user' do
-        controller.should_receive(:current_user=).with(@user)
-        do_post
+        controller.__send__(:current_user).should == @user
       end
 
-      it 'should redirect' do
-        do_post
-        response.should redirect_to(root_url)
-      end
+      it { should redirect_to(root_url) }
     end
 
     describe 'with invalid credentials' do
       before do
-        User.stub!(:autenticate).and_return(nil)
+        User.stub!(:authenticate).
+             with('invalid@example.com', 'test').
+             and_return(nil)
 
-        controller.stub!(:logged_in?).and_return(false)
+        post :create, :email => 'invalid@example.com', :password => 'test'
       end
 
       it 'should set current user to nil' do
-        controller.should_receive(:current_user=).with(nil)
-        do_post
+        controller.__send__(:current_user).should_not be_a(User)
       end
 
-      it 'should render "sessions/new" template' do
-        do_post
-        response.should render_template('sessions/new')
-      end
-    end
-
-    protected
-
-    def do_post
-      post :create,
-           :email    => 'valid@example.com',
-           :password => 'test'
+      it { should render_template(:new) }
     end
   end
 
   describe 'on DELETE to destroy' do
     before do
-      controller.stub!(:reset_session)
+      session[:id] = 1
+
+      delete :destroy, :id => 1
     end
 
     it 'should reset session' do
-      controller.should_receive(:reset_session)
-      do_delete
+      session[:id].should be_nil
     end
 
-    it 'should redirect' do
-      do_delete
-      response.should redirect_to(root_url)
-    end
-
-    protected
-
-    def do_delete
-      delete :destroy,
-             :id => 1
-    end
+    it { should redirect_to(root_url) }
   end
 end
