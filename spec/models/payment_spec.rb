@@ -122,10 +122,7 @@ describe Payment do
 
       describe 'with at least one entry' do
         before do
-          @first = mock('Payment')
-          @first.stub!(:created_at).and_return(60.days.ago)
-
-          Payment.stub!(:first).and_return(@first)
+          Factory(:payment, :created_at => 60.days.ago)
         end
 
         describe 'in days' do
@@ -177,35 +174,33 @@ describe Payment do
 
   describe 'when being created' do
     it 'should create valid payment' do
-      lambda {
-        create_payment
-      }.should change(Payment, :count).by(1)
+      Factory(:payment).should be_valid
     end
 
     it 'should require user ID' do
-      create_payment(:user_id => nil).errors[:user_id].should_not be_nil
+      Factory.build(:payment, :user_id => nil).should_not be_valid
     end
 
     it 'should require cost' do
-      create_payment(:cost => nil).errors[:cost].should_not be_nil
+      Factory.build(:payment, :cost => nil).should_not be_valid
     end
 
     it 'should require cost to be greater than zero' do
-      create_payment(:cost =>  0).errors[:cost].should_not be_nil
-      create_payment(:cost => -1).errors[:cost].should_not be_nil
+      Factory.build(:payment, :cost => 0).should_not be_valid
+      Factory.build(:payment, :cost => -1).should_not be_valid
     end
 
     it 'should require item' do
-      create_payment(:item => nil).errors[:item].should_not be_nil
+      Factory.build(:payment, :item => nil).should_not be_valid
     end
 
     it 'should allow a cost with a dollar sign' do
-      payment = create_payment(:cost => nil, :item => '$5.45 for lunch')
+      payment = Factory(:payment, :cost => nil, :item => '$5.45 for lunch')
       payment.cost.should == 5.45
     end
 
     it 'should allow a cost less than a dollar' do
-      payment = create_payment(:cost => nil, :item => '.25 for gum')
+      payment = Factory(:payment, :cost => nil, :item => '.25 for gum')
       payment.cost.should == 0.25
     end
 
@@ -213,7 +208,8 @@ describe Payment do
       ['', 'on', 'for'].each do |separator|
         describe "and cost and item separated by '#{separator}" do
           before do
-            @payment = create_payment(:cost => nil, :item => "5.45 #{separator} Subway for lunch")
+            @payment = Factory(:payment, :cost => nil,
+                                         :item => "5.45 #{separator} lunch")
           end
 
           it 'should extract cost from item' do
@@ -221,7 +217,7 @@ describe Payment do
           end
 
           it 'should remove cost from item' do
-            @payment.item.should == 'Subway for lunch'
+            @payment.item.should == 'lunch'
           end
         end
       end
@@ -254,29 +250,10 @@ describe Payment do
         1095 => 'Several Years Ago'
       }.each do |number_of, group|
         it "should return '#{group}' for #{number_of} days ago" do
-          payment = create_payment(:created_at => number_of.days.ago)
+          payment = Factory(:payment, :created_at => number_of.days.ago)
           payment.relative_date.should == group
         end
       end
     end
-  end
-
-  protected
-
-  def create_payment(options = {})
-    returning(new_payment(options)) do |account|
-      account.save
-    end
-  end
-
-  def new_payment(options = {})
-    Payment.new(valid_attributes.merge(options))
-  end
-
-  def valid_attributes
-    { :user_id => 1,
-      :cost    => 695.00,
-      :item    => 'registration for RailsConf 2009.'
-    }
   end
 end
