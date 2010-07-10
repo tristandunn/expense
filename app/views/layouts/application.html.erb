@@ -12,9 +12,9 @@
     <h1><a href="/">Expense</a></h1>
     <p>Simple, personal expense tracking.</p>
 
-    <% if logged_in? %>
+    <% if signed_in? %>
       <ul>
-        <li><a href="/logout">Logout</a></li>
+        <li><a href="/logout">Sign Out</a></li>
       </ul>
 
       <% if @payment %>
@@ -41,7 +41,7 @@
 </div>
 
 <div id="footer" class="container">
-  <% if logged_in? %>
+  <% if signed_in? %>
     <%= form_for(:search, :url => search_payments_path, :html => { :method => :get }) do %>
       <fieldset>
         <legend>Search</legend>

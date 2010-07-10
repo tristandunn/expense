@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   layout 'application'
 
-  before_filter :login_required
+  before_filter :authenticate
   before_filter :adjust_format_for_iphone
 
   protect_from_forgery

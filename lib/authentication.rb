@@ -4,13 +4,18 @@ module Authentication
   # Automatically add helper methods when included.
   def self.included(base)
     if base.respond_to?(:helper_method)
-      base.send(:helper_method, :current_user, :logged_in?)
+      base.send(:helper_method, :current_user, :signed_in?)
     end
   end
 
   # Redirect when authentication fails, or overwrite in a controller.
   def access_denied
     redirect_to new_session_url
+  end
+
+  # Filter method to enforce a sign in requirement.
+  def authenticate
+    access_denied unless signed_in?
   end
 
   # Load the user using the ID in the session variable, if present.
@@ -31,13 +36,8 @@ module Authentication
     session[:user] = user.is_a?(User) ? user.id : nil
   end
 
-  # Determine if the user is logged in.
-  def logged_in?
+  # Determine if the user is signed in.
+  def signed_in?
     current_user != :false
-  end
-
-  # Filter method to enfore a login requirement.
-  def login_required
-    access_denied unless logged_in?
   end
 end

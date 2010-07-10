@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :login_required,
+  skip_before_filter :authenticate,
                      :only => [:new, :create]
   before_filter      :ensure_request_is_for_current_user,
                      :only => [:delete, :destroy]

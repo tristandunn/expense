@@ -12,7 +12,7 @@ describe Authentication do
       end
 
       it 'should add helper methods to base' do
-        @base.should_receive(:send).with(:helper_method, :current_user, :logged_in?)
+        @base.should_receive(:send).with(:helper_method, :current_user, :signed_in?)
         Authentication.included(@base)
       end
     end
@@ -160,7 +160,7 @@ describe Authentication do
       end
     end
 
-    describe '#logged_in?' do
+    describe '#signed_in?' do
       before do
         @class.stub!(:current_user)
       end
@@ -171,7 +171,7 @@ describe Authentication do
         end
 
         it 'should return true' do
-          @class.send(:logged_in?).should be_true
+          @class.send(:signed_in?).should be_true
         end
       end
 
@@ -181,36 +181,36 @@ describe Authentication do
         end
 
         it 'should return false' do
-          @class.send(:logged_in?).should be_false
+          @class.send(:signed_in?).should be_false
         end
       end
     end
 
-    describe '#login_required' do
+    describe '#authenticate' do
       before do
-        @class.stub!(:logged_in?)
+        @class.stub!(:signed_in?)
         @class.stub!(:access_denied)
       end
 
-      describe 'when logged in' do
+      describe 'when signed in' do
         before do
-          @class.stub!(:logged_in?).and_return(true)
+          @class.stub!(:signed_in?).and_return(true)
         end
 
         it 'should not call access_denied' do
           @class.should_not_receive(:access_denied)
-          @class.send(:login_required)
+          @class.send(:authenticate)
         end
       end
 
-      describe 'when not logged in' do
+      describe 'when not signed in' do
         before do
-          @class.stub!(:logged_in?).and_return(false)
+          @class.stub!(:signed_in?).and_return(false)
         end
 
         it 'should call access_denied' do
           @class.should_receive(:access_denied)
-          @class.send(:login_required)
+          @class.send(:authenticate)
         end
       end
     end

@@ -12,7 +12,7 @@
   </ol>
 </div>
 
-<h2>Log In</h2>
+<h2>Sign In</h2>
 
 <%= form_tag(session_path, :method => :post) do %>
   <fieldset>
@@ -26,6 +26,6 @@
     <%= password_field_tag %><br>
     <br>
 
-    <button type="submit">Log In</button> or <a href="<%= new_user_path %>">create an account</a>.
+    <button type="submit">Sign In</button> or <a href="<%= new_user_path %>">sign up</a>.
   </fieldset>
 <% end %>
