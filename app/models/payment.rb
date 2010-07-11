@@ -13,6 +13,13 @@ class Payment < ActiveRecord::Base
     find_averages_for(unit).sum / determine_duration_since_first_entry_in(unit).to_f
   end
 
+  def self.calculate_averages_over_time
+    { :day   => calculate_average_for(:day),
+      :week  => calculate_average_for(:week),
+      :month => calculate_average_for(:month)
+    }
+  end
+
   def self.is_above_average_for?(unit)
     return false unless exists?
 

@@ -1,8 +1,9 @@
 class PaymentsController < ApplicationController
-  before_filter :load_payments_and_averages, :only => [:index, :search]
-
   def index
-    @query = params[:query]
+    @query    = params[:query]
+    @payments = current_user.payments
+    @payment  = @payments.build
+    @averages = @payments.calculate_averages_over_time
 
     if @query.present?
       @groups = @payments.search_grouped_by_relative_date(@query)
@@ -20,17 +21,5 @@ class PaymentsController < ApplicationController
     @payment.save
 
     redirect_to root_url
-  end
-
-  protected
-
-  def load_payments_and_averages
-    @payments = current_user.payments
-    @payment  = @payments.build
-    @averages = {
-      :day   => @payments.calculate_average_for(:day),
-      :week  => @payments.calculate_average_for(:week),
-      :month => @payments.calculate_average_for(:month)
-    }
   end
 end

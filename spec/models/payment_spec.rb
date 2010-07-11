@@ -13,6 +13,22 @@ describe Payment do
       end
     end
 
+    describe 'when calculating the averages over time' do
+      before do
+        Payment.stub!(:calculate_average_for).with(:day).and_return('day')
+        Payment.stub!(:calculate_average_for).with(:week).and_return('week')
+        Payment.stub!(:calculate_average_for).with(:month).and_return('month')
+      end
+
+      it 'should return averages for day, week, and month' do
+        Payment.calculate_averages_over_time.should == {
+          :day   => 'day',
+          :week  => 'week',
+          :month => 'month'
+        }
+      end
+    end
+
     describe 'when determing if the current average is above the overall average' do
       describe 'with records' do
         before do

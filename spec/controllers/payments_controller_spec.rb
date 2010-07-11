@@ -7,16 +7,19 @@ describe PaymentsController do
     @payment  = mock('Payment')
     @payments = mock('Payments')
     @payments.stub!(:build).and_return(@payment)
-    @payments.stub!(:calculate_average_for)
 
     @user.stub!(:payments).and_return(@payments)
   end
 
   describe 'on GET to index' do
     before do
-      @groups = mock('Groups')
+      @groups   = mock('Groups')
+      @averages = mock('Averages')
+
       @payments.stub!(:find_recent_grouped_by_relative_date).
                 and_return(@groups)
+      @payments.stub!(:calculate_averages_over_time).
+                and_return(@averages)
 
       get :index
     end
@@ -24,6 +27,7 @@ describe PaymentsController do
     it { should assign_to(:groups, @groups) }
     it { should assign_to(:payment, @payment) }
     it { should assign_to(:payments, @payments) }
+    it { should assign_to(:averages, @averages) }
     it { should render_template(:index) }
   end
 
