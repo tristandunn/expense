@@ -158,15 +158,10 @@ describe Payment do
         @payment = Factory(:payment, :item => 'groceries')
       end
 
-      it 'should find payments by item' do
-        Payment.search('cer').should       == [@payment]
-        Payment.search('grocer').should    == [@payment]
-        Payment.search('groceries').should == [@payment]
-      end
-
-      describe 'and grouping by relative date' do
-        it 'should find payments by item and group by relative date' do
-          Payment.search_grouped_by_relative_date('cer').to_a.should == [['Today', [@payment]]]
+      it 'should find payments by item and group by relative date' do
+        %w(cer grocer groceries).each do |query|
+          results = Payment.search_grouped_by_relative_date(query).to_a
+          results.should == [['Today', [@payment]]]
         end
       end
     end

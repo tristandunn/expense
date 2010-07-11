@@ -14,7 +14,7 @@
 
     <% if signed_in? %>
       <ul>
-        <li><a href="/logout">Sign Out</a></li>
+        <li><a href="<%= sign_out_path %>">Sign Out</a></li>
       </ul>
 
       <% if @payment %>
@@ -42,12 +42,12 @@
 
 <div id="footer" class="container">
   <% if signed_in? %>
-    <%= form_for(:search, :url => search_payments_path, :html => { :method => :get }) do %>
+    <%= form_for(:search, :url => payments_path, :html => { :method => :get }) do %>
       <fieldset>
         <legend>Search</legend>
 
-        <label for="search_query">Query</label><br>
-        <%= text_field :search, 'query', :placeholder => 'Search your expenses.' %>
+        <label for="query">Query</label><br>
+        <input type="text" name="query" id="query" placeholder="Search your expenses.">
         <br>
 
         <button type="submit">Search</button>

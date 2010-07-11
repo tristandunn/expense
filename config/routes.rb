@@ -1,11 +1,6 @@
 Expense::Application.routes.draw do |map|
-  resources :payments do
-    collection do
-      get :search
-    end
-  end
-
-  resource :session
+  resources :payments
+  resource  :session
 
   resources :users do
     member do
@@ -13,7 +8,7 @@ Expense::Application.routes.draw do |map|
     end
   end
 
-  match 'logout' => 'sessions#destroy'
+  match 'sign_out' => 'sessions#destroy'
 
   root  :to => 'payments#index'
 end

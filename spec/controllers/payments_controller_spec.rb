@@ -60,43 +60,7 @@ describe PaymentsController do
         post :create, :payment => {}
       end
 
-      it { should assign_to(:payment, @payment) }
-      it { should render_template(:new) }
-    end
-  end
-
-  describe 'on GET to search' do
-    before do
-      @groups = mock('Groups')
-
-      Payment.stub!(:search_grouped_by_relative_date).and_return(@groups)
-
-      get :search, :search => { :query => 'test' }
-    end
-
-    it { should assign_to(:query, 'test') }
-    it { should assign_to(:groups, @groups) }
-    it { should assign_to(:payment, @payment) }
-    it { should assign_to(:payments, @payments) }
-    it { should render_template(:search) }
-  end
-
-  describe 'when loading payments and averages' do
-    it 'should build a new payment' do
-      @payments.should_receive(:build)
-      controller.send(:load_payments_and_averages)
-    end
-
-    it 'should retrieve the current users payments' do
-      @user.should_receive(:payments)
-      controller.send(:load_payments_and_averages)
-    end
-
-    [:day, :week, :month].each do |unit|
-      it "should calculate average for #{unit}s" do
-        @payments.should_receive(:calculate_average_for).with(unit)
-        controller.send(:load_payments_and_averages)
-      end
+      it { should redirect_to(root_url) }
     end
   end
 end

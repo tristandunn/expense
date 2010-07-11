@@ -1,4 +1,4 @@
-<h2 class="title">Create a User</h2>
+<h2 class="title">Sign Up</h2>
 
 <%= error_messages_for :user, :id => 'errors', :class => nil, :header_message => nil, :message => 'Please correct the following:' %>
 
@@ -18,6 +18,6 @@
     <%= form.password_field :password_confirmation %><br>
     <br>
 
-    <button type="submit">Create</button> or <a href="<%= new_session_path %>">sign in</a>.
+    <button type="submit">Sign Up</button> or <a href="<%= new_session_path %>">sign in</a>.
   </fieldset>
 <% end %>

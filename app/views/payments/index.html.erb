@@ -1,5 +1,13 @@
 <div id="content">
-  <h2>Recent Expenses</h2>
+  <% if @query.present? %>
+    <h2>Search Results</h2>
+  <% else %>
+    <% if @groups.length > 0 %>
+      <h2>Recent Expenses</h2>
+    <% else %>
+      <h2>Expenses</h2>
+    <% end %>
+  <% end %>
 
   <% if @groups.length > 0 %>
     <% @groups.each do |group, payments| %>
@@ -14,7 +22,11 @@
   <% else %>
     <h3>No Expenses</h3>
 
-    <p>You do not have any expenses, yet. Once you spend some money add it using the field above.</p>
+    <% if @query.present? %>
+      <p>No results found.</p>
+    <% else %>
+      <p>You do not have any expenses, yet. Once you spend some money add it using the field above.</p>
+    <% end %>
   <% end %>
 </div>
 

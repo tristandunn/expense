@@ -5,6 +5,11 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /the sign in page/
+      new_session_path
+    when /the sign up page/
+      new_user_path
+
     else
       begin
         page_name =~ /the (.*) page/

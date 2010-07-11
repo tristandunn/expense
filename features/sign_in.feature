@@ -1,24 +1,24 @@
 Feature: Sign in
 
-  Scenario: Sign in with a valid user
+  Scenario: User signs in successfully
     Given a user exists with a email of "bob@example.com"
-    When I am on the homepage
+    When I go to the sign in page
     And I fill in "E-mail" with "bob@example.com"
     And I fill in "Password" with "test"
     And I press "Sign In"
     Then I should be signed in
 
-  Scenario: sign in with a valid user, but invalid password
+  Scenario: User enters the wrong password
     Given a user exists with a email of "bob@example.com"
-    When I am on the homepage
+    When I go to the sign in page
     And I fill in "E-mail" with "bob@example.com"
     And I fill in "Password" with "nope"
     And I press "Sign In"
-    Then I should not be signed in
+    Then I should be signed out
 
-  Scenario: Sign in with an invalid user
-    When I am on the homepage
+  Scenario: User is not signed up
+    When I go to the sign in page
     And I fill in "E-mail" with "bob@example.com"
     And I fill in "Password" with "test"
     And I press "Sign In"
-    Then I should not be signed in
+    Then I should be signed out
