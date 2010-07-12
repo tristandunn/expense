@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   include Authentication
 
-  layout 'application'
-
   before_filter :authenticate
   before_filter :adjust_format_for_iphone
 
