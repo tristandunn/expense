@@ -15,8 +15,7 @@ Simple, personal expense tracking.
    </pre>
 4. Create and migrate the database.
    <pre>
-   rake db:create
-   rake db:migrate
+   rake db:create db:migrate
    </pre>
 
 ## iPhone
