@@ -1,25 +1,29 @@
 class PaymentsController < ApplicationController
+  before_filter :find_payments, :build_payment
+
   def index
     @query    = params[:query]
-    @payments = current_user.payments
-    @payment  = @payments.build
-    @averages = @payments.calculate_averages_over_time
-
-    if @query.present?
-      @groups = @payments.search_grouped_by_relative_date(@query)
-    else
-      @groups = @payments.find_recent_grouped_by_relative_date
-    end
+    @payments = @payments.search(@query) if @query.present?
+    @groups   = @payments.recent.grouped_by_relative_date
   end
 
   def new
-    @payment = current_user.payments.build
   end
 
   def create
-    @payment = current_user.payments.build(params[:payment])
+    @payment.attributes = params[:payment]
     @payment.save
 
     redirect_to root_url
+  end
+
+  protected
+
+  def build_payment
+    @payment = @payments.build
+  end
+
+  def find_payments
+    @payments = current_user.payments
   end
 end

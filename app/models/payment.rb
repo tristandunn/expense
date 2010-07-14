@@ -7,43 +7,11 @@ class Payment < ActiveRecord::Base
   validates_numericality_of :cost, :greater_than => 0
   validates_presence_of     :item
 
-  default_scope :order => 'created_at DESC'
+  scope :recent, order('created_at DESC').limit(25)
+  scope :search, lambda { |query| where('item LIKE ?', "%#{query}%") }
 
-  def self.calculate_average_for(unit)
-    find_averages_for(unit).sum / determine_duration_since_first_entry_in(unit).to_f
-  end
-
-  def self.calculate_averages_over_time
-    { :day   => calculate_average_for(:day),
-      :week  => calculate_average_for(:week),
-      :month => calculate_average_for(:month)
-    }
-  end
-
-  def self.is_above_average_for?(unit)
-    return false unless exists?
-
-    find_averages_for(unit).first > calculate_average_for(unit)
-  end
-
-  def self.find_averages_for(unit)
-    all.group_by do |payment|
-      payment.created_at.strftime(determine_format_for(unit))
-    end.collect do |group, payments|
-      (payments.collect(&:cost).sum / payments.length).round(2)
-    end
-  end
-
-  def self.find_recent_grouped_by_relative_date(limit = 25)
-    all(:limit => limit).group_by(&:relative_date)
-  end
-
-  def self.search(query)
-    all(:conditions => ['item LIKE ?', "%#{query}%"])
-  end
-
-  def self.search_grouped_by_relative_date(query)
-    search(query).group_by(&:relative_date)
+  def self.grouped_by_relative_date
+    all.group_by(&:relative_date)
   end
 
   def relative_date
@@ -66,26 +34,6 @@ class Payment < ActiveRecord::Base
   end
 
   protected
-
-  def self.determine_format_for(unit)
-    case unit
-    when :day   then '%j%Y'
-    when :week  then '%W%Y'
-    when :month then '%m%Y'
-    end
-  end
-
-  def self.determine_duration_since_first_entry_in(unit)
-    return 1 unless first = first(:order => 'created_at ASC')
-
-    duration = case unit
-               when :day   then 1.day
-               when :week  then 7.days
-               when :month then 30.days
-               end
-
-    [1, (Time.now.to_f - first.created_at.to_f) / duration].max
-  end
 
   def extract_cost_from_item
     return unless cost.nil?
