@@ -236,41 +236,6 @@ div.container {
   content: ".";
 }
 
-#sidebar {
-  width: 250px;
-  float: right;
-}
-
-#sidebar form {
-  background: transparent;
-  padding: 0;
-  border: 0;
-}
-
-#sidebar dt {
-  margin: 0;
-  text-align: center;
-}
-
-#sidebar dd {
-  background: inherit;
-  color: #444;
-  margin: 4px 0 20px 0;
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-}
-
-#sidebar dd.above {
-  background: #FFF;
-  color: #755;
-}
-
-#sidebar dd.below {
-  background: #FFF;
-  color: #565;
-}
-
 #footer {
   overflow: hidden;
 }
