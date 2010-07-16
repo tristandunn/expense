@@ -66,6 +66,7 @@ div.container {
 #header li a {
   background: inherit;
   color: #FFF;
+  margin-left: 14px;
   font-size: 11px;
   font-family: "Lucida Grande";
   text-decoration: none;
@@ -129,26 +130,44 @@ div.container {
 }
 
 #content-container form {
+  font-size: 12px;
+}
+
+#content-container form label {
+  font-weight: bold;
+}
+
+.edit_user {
+  padding: 10px;
+}
+
+.edit_user label {
+  text-indent: 2px;
+  display: inline-block;
+}
+
+#new_user,
+#new_session {
   background: #F2FCFE;
   color: #333;
   width: 250px;
   padding: 10px;
   border: 2px solid #D1EFF9;
-  font-size: 12px;
   float: right;
 }
 
-#content-container form#new_user {
+#new_user {
   margin: 0 auto;
   float: none;
 }
 
-#content-container form label {
+#new_user label,
+#new_session label {
   color: #617F89;
-  font-weight: bold;
 }
 
-#content-container form input {
+#new_user input,
+#new_session input {
   width: 238px;
   padding: 4px;
   border: 1px solid #A6AAAB;
@@ -156,11 +175,13 @@ div.container {
   outline: 0;
 }
 
-#content-container form div.fieldWithErrors input {
+#new_user .fieldWithErrors input,
+#new_session .fieldWithErrors input {
   border-color: #900;
 }
 
-#content-container form a {
+#new_user a,
+#new_session a {
   background: inherit;
   color: #333;
 }

@@ -1,0 +1,13 @@
+<h3>Settings</h3>
+
+<%= form_for(current_user, :method => :put) do |form| %>
+  <fieldset>
+    <legend>Settings</legend>
+
+    <label for="user_time_zone">Time Zone</label><br>
+    <%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %><br>
+    <br>
+
+    <button type="submit">Save Settings</button>
+  </fieldset>
+<% end %>

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate
   before_filter :adjust_format_for_iphone
+  before_filter :adjust_time_zone, :if => :signed_in?
 
   protect_from_forgery
 
@@ -14,5 +15,9 @@ class ApplicationController < ActionController::Base
     if user_agent.present? && user_agent =~ /(iPhone)/
       request.format = :iphone
     end
+  end
+
+  def adjust_time_zone
+    Time.zone = current_user.time_zone
   end
 end

@@ -14,7 +14,8 @@
 
     <% if signed_in? %>
       <ul>
-        <li><a href="<%= sign_out_path %>">Sign Out</a></li>
+        <li><%= link_to 'Settings', edit_user_path(current_user) %></li>
+        <li><%= link_to 'Sign Out', sign_out_path %></li>
       </ul>
 
       <% if @payment %>

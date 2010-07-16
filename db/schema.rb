@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100623000239) do
+ActiveRecord::Schema.define(:version => 20100716010813) do
 
   create_table "payments", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -22,10 +22,11 @@ ActiveRecord::Schema.define(:version => 20100623000239) do
   add_index "payments", ["user_id"], :name => "index_expenses_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                          :null => false
-    t.string   "hashed_password", :limit => 128, :null => false
+    t.string   "email",                                             :null => false
+    t.string   "hashed_password", :limit => 128,                    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "time_zone",                      :default => "UTC", :null => false
   end
 
 end
