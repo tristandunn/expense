@@ -18,6 +18,8 @@ Simple, personal expense tracking.
    rake db:create db:migrate
    </pre>
 
+*Note:* You may need an older version of `sqlite3-ruby` on OS X Leopard.
+
 ## iPhone
 
 A simple iPhone-specific interface exists for expense entry and viewing.
