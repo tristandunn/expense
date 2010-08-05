@@ -1,4 +1,4 @@
-Expense::Application.routes.draw do |map|
+Expense::Application.routes.draw do
   resources :payments, :only => [:index, :new, :create]
   resource  :session,  :only => [:new, :create, :destroy]
 
