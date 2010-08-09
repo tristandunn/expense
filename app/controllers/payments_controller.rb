@@ -7,9 +7,6 @@ class PaymentsController < ApplicationController
     @groups   = @payments.recent.grouped_by_relative_date
   end
 
-  def new
-  end
-
   def create
     @payment.attributes = params[:payment]
     @payment.save
