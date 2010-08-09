@@ -4,11 +4,9 @@ describe Payment do
   describe 'class' do
     describe 'when grouping by relative date' do
       it 'should return an array of groups' do
-        Timecop.freeze(Time.utc(2010, 6, 2, 4, 0, 0)) do
-          @payment = Factory(:payment)
-          @user    = @payment.user
-          @user.payments.grouped_by_relative_date.to_a.should == [['Today', [@payment]]]
-        end
+        @payment = Factory(:payment)
+        @user    = @payment.user
+        @user.payments.grouped_by_relative_date.to_a.should == [['Today', [@payment]]]
       end
     end
 
@@ -104,10 +102,8 @@ describe Payment do
         1095 => 'Several Years Ago'
       }.each do |number_of, group|
         it "should return '#{group}' for #{number_of} days ago" do
-          Timecop.freeze(Time.utc(2010, 6, 2, 4, 0, 0)) do
-            payment = Factory(:payment, :created_at => number_of.days.ago)
-            payment.relative_date.should == group
-          end
+          payment = Factory(:payment, :created_at => number_of.days.ago)
+          payment.relative_date.should == group
         end
       end
     end
