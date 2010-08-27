@@ -1,8 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe User do
-  fixtures :users
-
   describe 'class' do
     describe 'when authenticating a user' do
       before do
