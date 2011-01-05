@@ -1,27 +1,18 @@
 Then /^I should see a payment for ([\.\d]+) on "([^"]*)" from "([^"]*)"$/ do |cost, item, relative_date|
-  within('h3') do
-    should have_content(relative_date)
-  end
+  should have_css("h3:contains('#{relative_date}')")
 
-  within('li') do
+  within('.payments li') do
     should have_css('span',   :content => item)
     should have_css('strong', :content => cost)
   end
 end
 
 Then /^I should not see a payment for ([\.\d]+) on "([^"]*)" from "([^"]*)"$/ do |cost, item, relative_date|
-  within('h3') do
-    should_not have_content(relative_date)
-  end
+  should_not have_css("h3:contains('#{relative_date}')")
 
-  within('li') do
-    within('span') do
-      should_not have_content(item)
-    end
-
-    within('strong') do
-      should_not have_content(cost)
-    end
+  within('.payments li') do
+    should_not have_css("span:contains('#{item}')")
+    should_not have_css("strong:contains('#{cost}')")
   end
 end
 
