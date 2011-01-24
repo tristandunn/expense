@@ -2,7 +2,7 @@
 
 Simple, personal expense tracking.
 
-## Install
+## Setup
 
 1. Clone the repository.
 2. Copy the database.example.yml to database.yml and update if needed.
@@ -18,19 +18,11 @@ Simple, personal expense tracking.
    rake db:create db:migrate
    </pre>
 
-*Note:* You may need an older version of `sqlite3-ruby` on OS X Leopard.
-
-## iPhone
-
-A simple iPhone-specific interface exists for expense entry and viewing.
-
-![iPhone interface.](http://cloud.github.com/downloads/tristandunn/expense/expense.iphone.png)
-
 ## License
 
 The MIT License
 
-Copyright (c) 2010 Tristan Dunn
+Copyright (c) 2011 Tristan Dunn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
