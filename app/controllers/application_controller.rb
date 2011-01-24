@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate
   before_filter :adjust_format_for_iphone
-  before_filter :adjust_time_zone, :if => :signed_in?
+  around_filter :adjust_time_zone, :if => :signed_in?
 
   protect_from_forgery
 
@@ -19,5 +19,8 @@ class ApplicationController < ActionController::Base
 
   def adjust_time_zone
     Time.zone = current_user.time_zone
+    yield
+  ensure
+    Time.zone = "UTC"
   end
 end
