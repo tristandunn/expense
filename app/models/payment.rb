@@ -7,13 +7,6 @@ class Payment < ActiveRecord::Base
   validates_numericality_of :cost, :greater_than => 0
   validates_presence_of     :item
 
-  scope :recent, order('created_at DESC').limit(25)
-  scope :search, lambda { |query| where('item LIKE ?', "%#{query}%") }
-
-  def self.grouped_by_relative_date
-    all.group_by(&:relative_date)
-  end
-
   def relative_date
     case (Time.zone.now.to_date - created_at.to_date)
     when 0         then 'Today'
@@ -31,6 +24,18 @@ class Payment < ActiveRecord::Base
     when 730..1094 then 'Two Years Ago'
     else                'Several Years Ago'
     end
+  end
+
+  def self.grouped_by_relative_date
+    all.group_by(&:relative_date)
+  end
+
+  def self.recent
+    order('created_at DESC').limit(25)
+  end
+
+  def self.search(query)
+    where('item LIKE ?', "%#{query}%")
   end
 
   protected
