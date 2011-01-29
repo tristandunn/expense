@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def adjust_format_for_iphone
-    user_agent = request.env['HTTP_USER_AGENT']
+    user_agent = request.env['HTTP_USER_AGENT'].to_s
 
-    if user_agent.present? && user_agent =~ /(iPhone)/
+    if user_agent =~ /iPhone/
       request.format = :iphone
     end
   end
