@@ -2,7 +2,6 @@ Feature: Settings
 
   Scenario: Setting a custom time zone
     Given the date is "2010-01-02"
-    And a user exists with a email of "bob@example.com"
     And the following payments exist:
       | user                   | item  | cost  | created_at          |
       | email: bob@example.com | lunch | 10.75 | 2010-01-02 00:00:00 |
