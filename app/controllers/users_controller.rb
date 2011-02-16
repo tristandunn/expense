@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_filter :authenticate,
-                     :only => [:new, :create]
-  before_filter      :ensure_request_is_for_current_user,
-                     :only => [:delete, :destroy]
+  before_filter      :ensure_request_is_for_current_user, :only => [:delete, :destroy]
+  skip_before_filter :authenticate,                       :only => [:new, :create]
 
   def new
     @user = User.new
@@ -27,6 +25,7 @@ class UsersController < ApplicationController
   end
 
   def delete
+    render :delete
   end
 
   def destroy
@@ -38,6 +37,6 @@ class UsersController < ApplicationController
   protected
 
   def ensure_request_is_for_current_user
-    redirect_to root_url unless current_user.id == params[:id].to_i
+    redirect_to(root_url) unless current_user.id == params[:id].to_i
   end
 end
