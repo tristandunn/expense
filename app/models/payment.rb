@@ -1,10 +1,12 @@
 class Payment < ActiveRecord::Base
+  COST_AND_ITEM_REGEXP = /^[$]?(\d*\.\d{1,2}|\d+)\s*(?:on|for)*\s+(.*)$/i
+
   belongs_to :user
 
-  before_validation :extract_cost_from_item
+  before_validation :extract_cost_from_item, if: ->(payment) { payment.cost.nil? }
 
   validates_presence_of     :user_id
-  validates_numericality_of :cost, :greater_than => 0
+  validates_numericality_of :cost, greater_than: 0
   validates_presence_of     :item
 
   def relative_date
@@ -41,9 +43,7 @@ class Payment < ActiveRecord::Base
   protected
 
   def extract_cost_from_item
-    return unless cost.nil?
-
-    if /^[$]?(\d*\.\d{1,2}|\d+)\s*(?:on|for)*\s+(.*)$/.match(item)
+    if COST_AND_ITEM_REGEXP.match(item)
       self.cost = $1
       self.item = $2
     end

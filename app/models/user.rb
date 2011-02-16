@@ -1,16 +1,15 @@
 require 'digest/sha2'
 
 class User < ActiveRecord::Base
-  has_many :payments, :dependent => :destroy
+  has_many :payments, dependent: :destroy
 
   validates_presence_of   :email
-  validates_uniqueness_of :email, :case_sensitive => false
-  validates_format_of     :email,
-                          :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates_uniqueness_of :email, case_sensitive: false
+  validates_format_of     :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 
-  validates_presence_of     :password,              :if => :password_required?
-  validates_presence_of     :password_confirmation, :if => :password_required?
-  validates_confirmation_of :password,              :if => :password_required?
+  validates_presence_of     :password,              if: :password_required?
+  validates_presence_of     :password_confirmation, if: :password_required?
+  validates_confirmation_of :password,              if: :password_required?
 
   before_save :hash_password
   before_save :clean_attributes

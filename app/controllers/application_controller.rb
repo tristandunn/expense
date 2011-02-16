@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate
   before_filter :adjust_format_for_iphone
-  around_filter :adjust_time_zone, :if => :signed_in?
+  around_filter :adjust_time_zone, if: :signed_in?
 
   protect_from_forgery
 

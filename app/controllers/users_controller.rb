@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter      :ensure_request_is_for_current_user, :only => [:delete, :destroy]
-  skip_before_filter :authenticate,                       :only => [:new, :create]
+  before_filter      :ensure_request_is_for_current_user, only: [:delete, :destroy]
+  skip_before_filter :authenticate,                       only: [:new, :create]
 
   def new
     @user = User.new
