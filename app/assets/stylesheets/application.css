@@ -1,3 +1,8 @@
+/*
+ *= require 'reset'
+ *= require_self
+ */
+
 body {
   background: #F4ECCF;
   color: #444;

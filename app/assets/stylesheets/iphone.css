@@ -1,3 +1,8 @@
+/*
+ *= require 'reset'
+ *= require_self
+ */
+
 body {
   font-size: 10px;
   min-height: 416px;
