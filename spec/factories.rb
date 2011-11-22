@@ -1,11 +1,13 @@
-Factory.define :payment do |payment|
-  payment.association(:user)
-  payment.cost { 299.99 }
-  payment.item { 'iPhone' }
-end
+FactoryGirl.define do
+  factory :payment do
+    association(:user)
+    cost { 299.99 }
+    item { 'iPhone' }
+  end
 
-Factory.define :user do |user|
-  user.sequence(:email)      { |n| "user#{n}@example.com" }
-  user.password              { 'test' }
-  user.password_confirmation { 'test' }
+  factory :user do
+    sequence(:email)      { |n| "user#{n}@example.com" }
+    password              { 'test' }
+    password_confirmation { 'test' }
+  end
 end
