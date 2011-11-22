@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
     Time.zone = current_user.time_zone
     yield
   ensure
-    Time.zone = "UTC"
+    Time.zone = 'UTC'
   end
 end
