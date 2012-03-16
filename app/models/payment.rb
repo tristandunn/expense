@@ -1,5 +1,5 @@
 class Payment < ActiveRecord::Base
-  COST_AND_ITEM_REGEXP = /^[$]?(\d*\.\d{1,2}|\d+)\s*(?:on|for)*\s+(.*)$/i
+  COST_AND_ITEM_REGEXP = /\A[$]?(\d*\.\d{1,2}|\d+)\s*(?:on|for)*\s+(.*)\Z/i.freeze
 
   belongs_to :user
 
