@@ -1,7 +1,7 @@
 Feature: Settings
 
   Scenario: Setting a custom time zone
-    Given the date is "2010-01-02"
+    Given the date is "2010-01-02 00:00:00 +0000"
     And the following payments exist:
       | user                   | item  | cost  | created_at          |
       | email: bob@example.com | lunch | 10.75 | 2010-01-02 00:00:00 |
