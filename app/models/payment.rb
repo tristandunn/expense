@@ -10,7 +10,7 @@ class Payment < ActiveRecord::Base
   validates_presence_of     :item
 
   def relative_date
-    case (Time.now.utc.to_date - created_at.to_date)
+    case (Time.zone.now.to_date - created_at.to_date)
     when 0         then "Today"
     when 1         then "Yesterday"
     when 2..6      then "Last Week"
