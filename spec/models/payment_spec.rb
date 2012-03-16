@@ -2,14 +2,6 @@ require "spec_helper"
 
 describe Payment do
   describe "class" do
-    describe "when grouping by relative date" do
-      it "should return an array of groups" do
-        @payment = Factory(:payment)
-        @user    = @payment.user
-        @user.payments.grouped_by_relative_date.to_a.should == [["Today", [@payment]]]
-      end
-    end
-
     describe "when searching" do
       before do
         @payment = Factory(:payment, :item => "groceries")

@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
   def index
     @query    = params[:query]
     @payments = @payments.search(@query) if @query.present?
-    @groups   = @payments.recent.grouped_by_relative_date
+    @groups   = @payments.recent.group_by(&:relative_date)
   end
 
   def create

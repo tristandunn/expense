@@ -28,10 +28,6 @@ class Payment < ActiveRecord::Base
     end
   end
 
-  def self.grouped_by_relative_date
-    all.group_by(&:relative_date)
-  end
-
   def self.recent
     order("created_at DESC").limit(25)
   end
