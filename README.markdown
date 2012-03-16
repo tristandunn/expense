@@ -5,15 +5,11 @@ Simple, personal expense tracking.
 ## Setup
 
 1. Clone the repository.
-2. Copy the database.example.yml to database.yml and update if needed.
-   <pre>
-   cp config/database.example.yml config/database.yml
-   </pre>
-3. Ensure you have the required gems installed.
+2. Ensure you have the required gems installed.
    <pre>
    bundle install
    </pre>
-4. Create and migrate the database.
+3. Create and migrate the database.
    <pre>
    rake db:create db:migrate
    </pre>
