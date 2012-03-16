@@ -1,5 +1,5 @@
 <%= form_for(@payment) do |form| %>
-  <%= form.text_field :item, :placeholder => 'Example: 5.45 on Subway for lunch' %>
+  <%= form.text_field :item, :placeholder => "Example: 5.45 on Subway for lunch" %>
 <% end %>
 
 <div id="payments">
@@ -9,7 +9,7 @@
 
       <ul>
         <% payments.each do |payment| -%>
-          <li><strong><%= number_to_currency payment.cost %></strong> on <span><%= h truncate(payment.item, :omission => '..', :length => 28) %></span>.</li>
+          <li><strong><%= number_to_currency payment.cost %></strong> on <span><%= h truncate(payment.item, :omission => "..", :length => 28) %></span>.</li>
         <% end %>
       </ul>
     <% end %>

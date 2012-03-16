@@ -39,7 +39,7 @@ div.container {
 
 #header h1 {
   font-size: 48px;
-  font-family: Futura, 'Gill Sans', Arial, Sans-serif;
+  font-family: Futura, "Gill Sans", Arial, Sans-serif;
   text-shadow: 2px 2px 0 #2E580E;
   float: left;
 }
@@ -124,7 +124,7 @@ div.container {
   padding: 2px;
   border-bottom: 2px solid #DDD;
   font-size: 12px;
-  font-family: 'Gill Sans', Arial, Sans-serif;
+  font-family: "Gill Sans", Arial, Sans-serif;
   letter-spacing: 1px;
   word-spacing: 2px;
   text-transform: uppercase;

@@ -3,7 +3,7 @@
 <head>
   <title>Expense - Simple, personal expense tracking.</title>
 
-  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag "application" %>
 </head>
 <body>
 
@@ -14,8 +14,8 @@
 
     <% if signed_in? %>
       <ul>
-        <li><%= link_to 'Settings', edit_user_path(current_user) %></li>
-        <li><%= link_to 'Sign Out', sign_out_path %></li>
+        <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+        <li><%= link_to "Sign Out", sign_out_path %></li>
       </ul>
 
       <% if @payment %>
@@ -24,7 +24,7 @@
             <legend>Add a Payment</legend>
 
             <label for="payment_item">Item</label><br>
-            <%= form.text_field :item, :placeholder => 'Example: 5.45 on Subway for lunch' %>
+            <%= form.text_field :item, :placeholder => "Example: 5.45 on Subway for lunch" %>
             <br>
 
             <button type="submit">Add</button>

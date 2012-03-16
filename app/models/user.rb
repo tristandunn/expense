@@ -1,4 +1,4 @@
-require 'digest/sha2'
+require "digest/sha2"
 
 class User < ActiveRecord::Base
   has_many :payments, dependent: :destroy

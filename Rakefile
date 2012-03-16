@@ -1,7 +1,4 @@
-require File.expand_path('../config/application', __FILE__)
-require 'rake'
+require File.expand_path("../config/application", __FILE__)
+require "rake"
 
 Expense::Application.load_tasks
-
-desc 'Run all examples and features'
-task :default => [:spec, :cucumber]

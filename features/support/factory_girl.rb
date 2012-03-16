@@ -1,1 +1,1 @@
-require 'factory_girl/step_definitions'
+require "factory_girl/step_definitions"

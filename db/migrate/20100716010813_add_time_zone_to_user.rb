@@ -1,6 +1,6 @@
 class AddTimeZoneToUser < ActiveRecord::Migration
   def self.up
-    add_column :users, :time_zone, :string, :null => false, :default => 'UTC'
+    add_column :users, :time_zone, :string, :null => false, :default => "UTC"
   end
 
   def self.down

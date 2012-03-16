@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def adjust_format_for_iphone
-    user_agent = request.env['HTTP_USER_AGENT'].to_s
+    user_agent = request.env["HTTP_USER_AGENT"].to_s
 
     if user_agent =~ /iPhone/
       request.format = :iphone
@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
     Time.zone = current_user.time_zone
     yield
   ensure
-    Time.zone = 'UTC'
+    Time.zone = "UTC"
   end
 end
