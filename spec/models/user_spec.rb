@@ -4,7 +4,7 @@ describe User do
   describe "class" do
     describe "when authenticating a user" do
       before do
-        @user = Factory(:user)
+        @user = create(:user)
       end
 
       it "should return the user for valid credentials" do
@@ -39,49 +39,49 @@ describe User do
 
   describe "when being created" do
     it "should require e-mail" do
-      Factory.build(:user, email: nil).should_not be_valid
+      build(:user, email: nil).should_not be_valid
     end
 
     it "should require valid e-mail" do
-      Factory.build(:user, email: "@.com").should_not be_valid
+      build(:user, email: "@.com").should_not be_valid
     end
 
     it "should require unique e-mail" do
-      user = Factory(:user)
+      user = create(:user)
 
-      Factory.build(:user, email: user.email.upcase).should_not be_valid
+      build(:user, email: user.email.upcase).should_not be_valid
     end
 
     it "should require password" do
-      Factory.build(:user, password: nil).should_not be_valid
+      build(:user, password: nil).should_not be_valid
     end
 
     it "should require password confirmation" do
-      Factory.build(:user, password_confirmation: nil).should_not be_valid
+      build(:user, password_confirmation: nil).should_not be_valid
     end
 
     it "should require password to match confirmation" do
-      Factory.build(:user, password: "nope").should_not be_valid
+      build(:user, password: "nope").should_not be_valid
     end
 
     it "should generate and set hashed password" do
-      Factory(:user).hashed_password.should_not be_nil
+      create(:user).hashed_password.should_not be_nil
     end
 
     it "should downcase e-mail" do
-      Factory(:user, email: "SoMe@GuY.com").email.should == "some@guy.com"
+      create(:user, email: "SoMe@GuY.com").email.should == "some@guy.com"
     end
   end
 
   describe "instance" do
     it "should have many payments" do
-      Factory(:user).payments.should == []
+      create(:user).payments.should == []
     end
   end
 
   describe "when being updated" do
     before do
-      @user = Factory(:user)
+      @user = create(:user)
     end
 
     it "should re-hash password, if it was modified" do
@@ -99,8 +99,8 @@ describe User do
 
   describe "when being destroyed" do
     before do
-      @user    = Factory(:user)
-      @payment = Factory(:payment, user: @user)
+      @user    = create(:user)
+      @payment = create(:payment, user: @user)
     end
 
     it "should destroy associated payments" do

@@ -4,7 +4,7 @@ describe Payment do
   describe "class" do
     describe "when searching" do
       before do
-        @payment = Factory(:payment, item: "groceries")
+        @payment = create(:payment, item: "groceries")
       end
 
       it "should find payments by item and group by relative date" do
@@ -18,33 +18,33 @@ describe Payment do
 
   describe "when being created" do
     it "should create valid payment" do
-      Factory(:payment).should be_valid
+      create(:payment).should be_valid
     end
 
     it "should require user ID" do
-      Factory.build(:payment, user_id: nil).should_not be_valid
+      build(:payment, user_id: nil).should_not be_valid
     end
 
     it "should require cost" do
-      Factory.build(:payment, cost: nil).should_not be_valid
+      build(:payment, cost: nil).should_not be_valid
     end
 
     it "should require cost to be greater than zero" do
-      Factory.build(:payment, cost: 0).should_not be_valid
-      Factory.build(:payment, cost: -1).should_not be_valid
+      build(:payment, cost: 0).should_not be_valid
+      build(:payment, cost: -1).should_not be_valid
     end
 
     it "should require item" do
-      Factory.build(:payment, item: nil).should_not be_valid
+      build(:payment, item: nil).should_not be_valid
     end
 
     it "should allow a cost with a dollar sign" do
-      payment = Factory(:payment, cost: nil, item: "$5.45 for lunch")
+      payment = create(:payment, cost: nil, item: "$5.45 for lunch")
       payment.cost.should == 5.45
     end
 
     it "should allow a cost less than a dollar" do
-      payment = Factory(:payment, cost: nil, item: ".25 for gum")
+      payment = create(:payment, cost: nil, item: ".25 for gum")
       payment.cost.should == 0.25
     end
 
@@ -52,8 +52,7 @@ describe Payment do
       ["", "on", "for"].each do |separator|
         describe "and cost and item separated by '#{separator}'" do
           before do
-            @payment = Factory(:payment, cost: nil,
-                                         item: "5.45 #{separator} lunch")
+            @payment = create(:payment, cost: nil, item: "5.45 #{separator} lunch")
           end
 
           it "should extract cost from item" do
@@ -70,7 +69,7 @@ describe Payment do
 
   describe "instance" do
     before do
-      @payment = Factory(:payment)
+      @payment = create(:payment)
     end
 
     it "should belong to a user" do
@@ -94,7 +93,7 @@ describe Payment do
         1095 => "Several Years Ago"
       }.each do |number_of, group|
         it "should return '#{group}' for #{number_of} days ago" do
-          payment = Factory(:payment, created_at: number_of.days.ago)
+          payment = create(:payment, created_at: number_of.days.ago)
           payment.relative_date.should == group
         end
       end

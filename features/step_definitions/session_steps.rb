@@ -1,5 +1,5 @@
 Given /^I am signed in$/ do
-  user = Factory(:user)
+  user = create(:user)
 
   step %{I sign in as "#{user.email} / #{user.password}"}
 end
