@@ -39,29 +39,29 @@ describe User do
 
   describe "when being created" do
     it "should require e-mail" do
-      Factory.build(:user, :email => nil).should_not be_valid
+      Factory.build(:user, email: nil).should_not be_valid
     end
 
     it "should require valid e-mail" do
-      Factory.build(:user, :email => "@.com").should_not be_valid
+      Factory.build(:user, email: "@.com").should_not be_valid
     end
 
     it "should require unique e-mail" do
       user = Factory(:user)
 
-      Factory.build(:user, :email => user.email.upcase).should_not be_valid
+      Factory.build(:user, email: user.email.upcase).should_not be_valid
     end
 
     it "should require password" do
-      Factory.build(:user, :password => nil).should_not be_valid
+      Factory.build(:user, password: nil).should_not be_valid
     end
 
     it "should require password confirmation" do
-      Factory.build(:user, :password_confirmation => nil).should_not be_valid
+      Factory.build(:user, password_confirmation: nil).should_not be_valid
     end
 
     it "should require password to match confirmation" do
-      Factory.build(:user, :password => "nope").should_not be_valid
+      Factory.build(:user, password: "nope").should_not be_valid
     end
 
     it "should generate and set hashed password" do
@@ -69,7 +69,7 @@ describe User do
     end
 
     it "should downcase e-mail" do
-      Factory(:user, :email => "SoMe@GuY.com").email.should == "some@guy.com"
+      Factory(:user, email: "SoMe@GuY.com").email.should == "some@guy.com"
     end
   end
 
@@ -85,13 +85,13 @@ describe User do
     end
 
     it "should re-hash password, if it was modified" do
-      @user.update_attributes(:password => "secure", :password_confirmation => "secure")
+      @user.update_attributes(password: "secure", password_confirmation: "secure")
 
       User.authenticate(@user.email, "secure").should == @user
     end
 
     it "should not re-hash password, if it was not modified" do
-      @user.update_attributes(:email => "new-address@example.com")
+      @user.update_attributes(email: "new-address@example.com")
 
       User.authenticate(@user.email, "test").should == @user
     end
@@ -100,7 +100,7 @@ describe User do
   describe "when being destroyed" do
     before do
       @user    = Factory(:user)
-      @payment = Factory(:payment, :user => @user)
+      @payment = Factory(:payment, user: @user)
     end
 
     it "should destroy associated payments" do

@@ -2,8 +2,8 @@ Then /^I should see a payment for ([\.\d]+) on "([^"]*)" from "([^"]*)"$/ do |co
   should have_css("h3:contains('#{relative_date}')")
 
   within(".payments li") do
-    should have_css("span",   :content => item)
-    should have_css("strong", :content => cost)
+    should have_css("span",   content: item)
+    should have_css("strong", content: cost)
   end
 end
 

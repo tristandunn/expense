@@ -8,7 +8,7 @@ describe Authentication do
   describe "class" do
     describe "when included" do
       before do
-        @base = mock("Base", :send => true, :helper_method => true)
+        @base = mock("Base", send: true, helper_method: true)
       end
 
       it "should add helper methods to base" do

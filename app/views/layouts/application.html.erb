@@ -24,7 +24,7 @@
             <legend>Add a Payment</legend>
 
             <label for="payment_item">Item</label><br>
-            <%= form.text_field :item, :placeholder => "Example: 5.45 on Subway for lunch" %>
+            <%= form.text_field :item, placeholder: "Example: 5.45 on Subway for lunch" %>
             <br>
 
             <button type="submit">Add</button>
@@ -43,7 +43,7 @@
 
 <div id="footer" class="container">
   <% if signed_in? %>
-    <%= form_for(:search, :url => payments_path, :html => { :method => :get }) do %>
+    <%= form_for(:search, url: payments_path, html: { method: :get }) do %>
       <fieldset>
         <legend>Search</legend>
 
