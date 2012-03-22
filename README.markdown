@@ -1,4 +1,4 @@
-# Expense [![Build Status](https://secure.travis-ci.org/tristandunn/expense.png?branch=master)](http://travis-ci.org/tristandunn/expense)
+# Expense [![Build Status](https://secure.travis-ci.org/tristandunn/expense.png?branch=master)](http://travis-ci.org/tristandunn/expense) [![Dependency Status](https://gemnasium.com/tristandunn/expense.png)](https://gemnasium.com/tristandunn/expense)
 
 Simple, personal expense tracking.
 
