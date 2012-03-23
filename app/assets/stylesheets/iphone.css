@@ -14,10 +14,11 @@ input {
 }
 
 h1 {
-  background: #5A843A;
+  background-color: #5A843A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#6A944A), to(#4A742A));
   color: #FFF;
   padding: 12px 0;
-  border-bottom: 3px solid #2E580E;
+  border-bottom: 1px solid #2E580E;
   font-size: 32px;
   text-align: center;
   text-shadow: 2px 2px 0 #2E580E;
@@ -39,7 +40,8 @@ h1 a {
 
 #new_payment {
   position: relative;
-  background: #5A843A;
+  background-color: #5A843A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#6A944A), to(#4A742A));
   height: 50px;
 }
 
@@ -60,8 +62,9 @@ h1 a {
 }
 
 #payments h3 {
-  background: #EEE;
-  color: #444;
+  background-color: #EEE;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#EEE));
+  color: #333;
   padding: 8px 0;
   border-top: 1px solid #FFF;
   border-bottom: 1px solid #CCC;
