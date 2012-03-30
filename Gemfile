@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "dynamic_form", "1.1.4"
-gem "rails",        "3.2.2"
+gem "rails",        "3.2.3.rc2"
 gem "sqlite3",      "1.3.5"
 
 group :development do
