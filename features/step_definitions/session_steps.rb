@@ -4,6 +4,10 @@ Given /^I am signed in$/ do
   step %{I sign in as "#{user.email} / #{user.password}"}
 end
 
+Given /^a user exists with a email of "(.*?)"$/ do |email|
+  create(:user, email: email)
+end
+
 When /^I sign in as "(.*)\/(.*)"$/ do |email, password|
   step %{I go to the sign in page}
   step %{I fill in "E-mail" with "#{email.strip}"}

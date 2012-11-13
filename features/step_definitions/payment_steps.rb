@@ -1,3 +1,13 @@
+Given /^the following payments exist:$/ do |table|
+  table.hashes.each do |hash|
+    if attributes = Hash[*hash.delete("user").split(": ")]
+      hash["user"] = User.where(attributes).first || create(:user, attributes)
+    end
+
+    create(:payment, hash)
+  end
+end
+
 Then /^I should see a payment for ([\.\d]+) on "([^"]*)" from "([^"]*)"$/ do |cost, item, relative_date|
   should have_css("h3:contains('#{relative_date}')")
 
