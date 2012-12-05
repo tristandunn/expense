@@ -11,7 +11,7 @@ Feature: Settings
     Then I should see a payment for 10.75 on "lunch" from "Today"
     And I should see a payment for 1.35 on "drink" from "Today"
     When I follow "Settings"
-    And I select "Eastern Time (US & Canada)" from "Time Zone"
+    And I select "(GMT-05:00) Eastern Time (US & Canada)" from "Time Zone"
     And I press "Save Settings"
     Then I should be on the home page
     And I should see a payment for 10.75 on "lunch" from "Yesterday"

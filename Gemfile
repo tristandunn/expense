@@ -13,5 +13,5 @@ group :test do
   gem "database_cleaner",   "0.9.1"
   gem "factory_girl_rails", "4.1.0"
   gem "rspec-rails",        "2.12.0"
-  gem "timecop",            "0.5.3"
+  gem "timecop",            "0.5.4"
 end

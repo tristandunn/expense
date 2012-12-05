@@ -4,9 +4,9 @@ Feature: Sign up
     Given I am on the sign up page
 
   Scenario: User signs up successfully
-    When I fill in "E-mail" with "bob@example.com"
-    And I fill in "Password" with "test"
-    And I fill in "Password Confirmation" with "test"
+    When I fill in "user_email" with "bob@example.com"
+    And I fill in "user_password" with "test"
+    And I fill in "user_password_confirmation" with "test"
     And I press "Sign Up"
     Then I should be signed in
 
