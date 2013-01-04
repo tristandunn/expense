@@ -57,6 +57,9 @@ module Expense
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = "1.0"
+
+    # Use YUI Compressor to compress the CSS.
+    config.assets.css_compressor = :yui
   end
 end
 

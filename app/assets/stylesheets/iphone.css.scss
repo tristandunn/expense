@@ -1,0 +1,86 @@
+/*
+ *= require reset
+ *= require_self
+ */
+
+body {
+  font-size: 10px;
+  min-height: 416px;
+}
+
+body,
+input {
+  font-family: Helvetica;
+}
+
+h1 {
+  background-color: #5A843A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#6A944A), to(#4A742A));
+  color: #FFF;
+  padding: 12px 0;
+  border-bottom: 1px solid #2E580E;
+  font-size: 32px;
+  text-align: center;
+  text-shadow: 2px 2px 0 #2E580E;
+
+  a {
+    background: inherit;
+    color: #FFF;
+    text-decoration: none;
+  }
+}
+
+#new_session {
+  padding: 12px;
+
+  * {
+    font-size: 16px;
+  }
+}
+
+#new_payment {
+  position: relative;
+  background-color: #5A843A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#6A944A), to(#4A742A));
+  height: 50px;
+
+  input {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    bottom: 8px;
+    left: 6px;
+    background: #FFF;
+    color: #555;
+    font-size: 14px;
+
+    &:focus {
+      background: #FFF;
+      color: #000;
+    }
+  }
+}
+
+#payments {
+  h3 {
+    background-color: #EEE;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#EEE));
+    color: #333;
+    padding: 8px 0;
+    border-top: 1px solid #FFF;
+    border-bottom: 1px solid #CCC;
+    font-size: 14px;
+    font-weight:  bold;
+    text-align: center;
+  }
+
+  li {
+    padding: 12px;
+    border-bottom: 1px solid #DDD;
+    font-size: 16px;
+
+    strong {
+      font-weight: bold;
+    }
+  }
+}

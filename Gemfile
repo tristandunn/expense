@@ -4,6 +4,11 @@ gem "dynamic_form", "1.1.4"
 gem "rails",        "3.2.10"
 gem "sqlite3",      "1.3.6"
 
+group :assets do
+  gem "sass-rails",     "3.2.5"
+  gem "yui-compressor", "0.9.6"
+end
+
 group :development do
   gem "rspec-rails", "2.12.0"
 end
