@@ -5,14 +5,16 @@ Simple, personal expense tracking.
 ## Setup
 
 1. Clone the repository.
+
 2. Ensure you have the required gems installed.
-   <pre>
+   ```
    bundle install
-   </pre>
+   ```
+
 3. Create and migrate the database.
-   <pre>
+   ```
    rake db:create db:migrate
-   </pre>
+   ```
 
 ## License
 
