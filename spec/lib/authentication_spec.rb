@@ -8,7 +8,7 @@ describe Authentication do
   describe "class" do
     describe "when included" do
       before do
-        @base = mock("Base", send: true, helper_method: true)
+        @base = double("Base", send: true, helper_method: true)
       end
 
       it "should add helper methods to base" do
@@ -25,8 +25,8 @@ describe Authentication do
 
     describe "#access_denied" do
       before do
-        @class.stub!(:redirect_to)
-        @class.stub!(:new_session_url).and_return("/")
+        @class.stub(:redirect_to)
+        @class.stub(:new_session_url).and_return("/")
       end
 
       it "should redirect to new_session_url" do
@@ -40,10 +40,10 @@ describe Authentication do
         @user    = mock_model(User)
         @session = {}
 
-        @class.stub!(:session).and_return(@session)
-        @class.stub!(:current_user=)
+        @class.stub(:session).and_return(@session)
+        @class.stub(:current_user=)
 
-        User.stub!(:find).and_return(@user)
+        User.stub(:find).and_return(@user)
       end
 
       describe "when user is defined in the session" do
@@ -77,7 +77,7 @@ describe Authentication do
 
     describe "#current_user" do
       before do
-        @class.stub!(:user_from_session)
+        @class.stub(:user_from_session)
       end
 
       describe "when a user is already loaded" do
@@ -101,7 +101,7 @@ describe Authentication do
           before do
             @user = mock_model(User)
 
-            @class.stub!(:user_from_session).and_return(@user)
+            @class.stub(:user_from_session).and_return(@user)
           end
 
           it "should assign user to instance variable" do
@@ -112,7 +112,7 @@ describe Authentication do
 
         describe "and no user is found" do
           before do
-            @class.stub!(:user_from_session).and_return(nil)
+            @class.stub(:user_from_session).and_return(nil)
           end
 
           it "should assign :false to instance variable" do
@@ -128,7 +128,7 @@ describe Authentication do
         @user    = mock_model(User)
         @session = {}
 
-        @class.stub!(:session).and_return(@session)
+        @class.stub(:session).and_return(@session)
       end
 
       describe "when assigned a user" do
@@ -162,12 +162,12 @@ describe Authentication do
 
     describe "#signed_in?" do
       before do
-        @class.stub!(:current_user)
+        @class.stub(:current_user)
       end
 
       describe "when a user is present" do
         before do
-          @class.stub!(:current_user).and_return(true)
+          @class.stub(:current_user).and_return(true)
         end
 
         it "should return true" do
@@ -177,7 +177,7 @@ describe Authentication do
 
       describe "when no user is present" do
         before do
-          @class.stub!(:current_user).and_return(:false)
+          @class.stub(:current_user).and_return(:false)
         end
 
         it "should return false" do
@@ -188,13 +188,13 @@ describe Authentication do
 
     describe "#authenticate" do
       before do
-        @class.stub!(:signed_in?)
-        @class.stub!(:access_denied)
+        @class.stub(:signed_in?)
+        @class.stub(:access_denied)
       end
 
       describe "when signed in" do
         before do
-          @class.stub!(:signed_in?).and_return(true)
+          @class.stub(:signed_in?).and_return(true)
         end
 
         it "should not call access_denied" do
@@ -205,7 +205,7 @@ describe Authentication do
 
       describe "when not signed in" do
         before do
-          @class.stub!(:signed_in?).and_return(false)
+          @class.stub(:signed_in?).and_return(false)
         end
 
         it "should call access_denied" do
