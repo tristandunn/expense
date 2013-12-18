@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div id="header">
+<header>
   <div class="container">
     <h1><a href="/">Expense</a></h1>
     <p>Simple, personal expense tracking.</p>
@@ -33,15 +33,15 @@
       <% end %>
     <% end %>
   </div>
-</div>
+</header>
 
-<div id="content-container">
+<section>
   <div class="container">
     <%= yield %>
   </div>
-</div>
+</section>
 
-<div id="footer" class="container">
+<footer>
   <% if signed_in? %>
     <%= form_for(:search, url: payments_path, html: { method: :get }) do %>
       <fieldset>
@@ -60,7 +60,7 @@
     Created by <a href="http://tristandunn.com">Tristan Dunn</a>.<br>
     Source code <a href="https://github.com/tristandunn/expense">available on GitHub</a>.
   </p>
-</div>
+</footer>
 
 </body>
 </html>
