@@ -8,7 +8,7 @@ Expense::Application.routes.draw do
     end
   end
 
-  match "sign_out" => "Sessions#destroy"
+  get "sign_out", to: "sessions#destroy"
 
-  root to: "Payments#index"
+  root to: "payments#index"
 end

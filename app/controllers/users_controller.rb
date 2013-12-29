@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_parameters)
 
     if @user.save
       self.current_user = @user
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.update_attributes(params[:user])
+    current_user.update_attributes(user_parameters)
 
     redirect_to root_url
   end
@@ -38,5 +38,9 @@ class UsersController < ApplicationController
 
   def ensure_request_is_for_current_user
     redirect_to(root_url) unless current_user.id == params[:id].to_i
+  end
+
+  def user_parameters
+    params.require(:user).permit(:email, :password, :password_confirmation, :time_zone)
   end
 end

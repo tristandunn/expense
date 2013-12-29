@@ -8,7 +8,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    @payment.attributes = params[:payment]
+    @payment.attributes = payment_parameters
     @payment.save
 
     redirect_to root_url
@@ -22,5 +22,9 @@ class PaymentsController < ApplicationController
 
   def find_payments
     @payments = current_user.payments
+  end
+
+  def payment_parameters
+    params.require(:payment).permit(:item)
   end
 end
