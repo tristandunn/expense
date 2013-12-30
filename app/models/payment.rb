@@ -39,9 +39,9 @@ class Payment < ActiveRecord::Base
   protected
 
   def extract_cost_from_item
-    if COST_AND_ITEM_REGEXP.match(item)
-      self.cost = $1
-      self.item = $2
-    end
+    return unless COST_AND_ITEM_REGEXP.match(item)
+
+    self.cost = $1
+    self.item = $2
   end
 end
