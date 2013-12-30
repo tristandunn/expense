@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_filter :find_payments, :build_payment
+  before_action :find_payments, :build_payment
 
   def index
     @query    = params[:query]

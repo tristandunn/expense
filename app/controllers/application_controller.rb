@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   include Authentication
 
-  before_filter :authenticate
-  before_filter :adjust_format_for_iphone
-  around_filter :adjust_time_zone, if: :signed_in?
+  before_action :authenticate
+  before_action :adjust_format_for_iphone
+  around_action :adjust_time_zone, if: :signed_in?
 
   protect_from_forgery
 
