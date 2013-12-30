@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    self.current_user = User.authenticate(params[:email], params[:password])
+    self.current_user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
 
     if signed_in?
       redirect_to root_url

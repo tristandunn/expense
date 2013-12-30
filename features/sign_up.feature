@@ -15,4 +15,3 @@ Feature: Sign up
     Then I should be signed out
     And I should see "Email can't be blank"
     And I should see "Password can't be blank"
-    And I should see "Password confirmation can't be blank"

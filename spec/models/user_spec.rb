@@ -1,42 +1,6 @@
 require "spec_helper"
 
 describe User do
-  describe "class" do
-    describe "when authenticating a user" do
-      before do
-        @user = create(:user)
-      end
-
-      it "should return the user for valid credentials" do
-        User.authenticate(@user.email, "test").should == @user
-      end
-
-      it "should ignore case of e-mail address" do
-        User.authenticate(@user.email.upcase, "test").should == @user
-      end
-
-      it "should return nil for invalid credentials" do
-        User.authenticate(@user.email, "nope").should be_nil
-      end
-    end
-
-    describe "when hashing a password" do
-      it "should not do a single hash" do
-        User.hash_password("test").should_not == User.hash_string("test")
-      end
-    end
-
-    describe "when hashing a string" do
-      it "should should use SHA-512" do
-        User.hash_string("test").size.should ==128
-      end
-
-      it "should hash string with a salt" do
-        User.hash_string("test").should_not == Digest::SHA512.hexdigest("test")
-      end
-    end
-  end
-
   describe "when being created" do
     it "should require e-mail" do
       build(:user, email: nil).should_not be_valid
@@ -64,10 +28,6 @@ describe User do
       build(:user, password: "nope").should_not be_valid
     end
 
-    it "should generate and set hashed password" do
-      create(:user).hashed_password.should_not be_nil
-    end
-
     it "should downcase e-mail" do
       create(:user, email: "SoMe@GuY.com").email.should == "some@guy.com"
     end
@@ -76,24 +36,6 @@ describe User do
   describe "instance" do
     it "should have many payments" do
       create(:user).payments.should == []
-    end
-  end
-
-  describe "when being updated" do
-    before do
-      @user = create(:user)
-    end
-
-    it "should re-hash password, if it was modified" do
-      @user.update_attributes(password: "secure", password_confirmation: "secure")
-
-      User.authenticate(@user.email, "secure").should == @user
-    end
-
-    it "should not re-hash password, if it was not modified" do
-      @user.update_attributes(email: "new-address@example.com")
-
-      User.authenticate(@user.email, "test").should == @user
     end
   end
 
