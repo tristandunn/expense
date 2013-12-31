@@ -12,7 +12,15 @@
 
 <%= yield %>
 
-<%= javascript_include_tag "application.iphone" %>
+<script>
+if (!window.navigator.standalone) {
+  window.addEventListener("load", function() {
+    setTimeout(function() {
+      window.scrollTo(0, 1);
+    }, 100);
+  });
+}
+</script>
 
 </body>
 </html>
