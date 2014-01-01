@@ -18,5 +18,5 @@ group :test do
   gem "cucumber-rails",     "1.4.0", require: false
   gem "database_cleaner",   "1.2.0"
   gem "factory_girl_rails", "4.3.0"
-  gem "timecop",            "0.7.0"
+  gem "timecop",            "0.7.1"
 end
