@@ -1,8 +1,9 @@
 class PaymentsController < ApplicationController
-  before_action :find_payments, :build_payment
+  before_action :build_payment
 
   def index
     @query    = params[:query]
+    @payments = current_user.payments
     @payments = @payments.search(@query) if @query.present?
     @groups   = @payments.recent.group_by(&:relative_date)
   end
@@ -17,11 +18,7 @@ class PaymentsController < ApplicationController
   protected
 
   def build_payment
-    @payment = @payments.build
-  end
-
-  def find_payments
-    @payments = current_user.payments
+    @payment = current_user.payments.build
   end
 
   def payment_parameters
